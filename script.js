@@ -3,9 +3,9 @@ let currentScreen = 1;
 let cakeCelebrated = false;
 
 
-/* =================================
-   SONG
-================================= */
+/* =========================
+   MUSIC
+========================= */
 
 const birthdaySong =
     document.getElementById("birthdaySong");
@@ -19,30 +19,66 @@ function startSong() {
 
     birthdaySong.volume = 0.7;
 
-    birthdaySong.play().catch(() => {
-        console.log("Song waiting for user interaction.");
-    });
+    birthdaySong.play()
+        .then(() => {
+
+            console.log("Song started successfully.");
+
+        })
+        .catch((error) => {
+
+            console.log("Song could not start:", error);
+
+        });
+
 }
 
 
+/* =========================
+   START SURPRISE
+========================= */
 
-/* =================================
-   CHANGE SCREEN
-================================= */
+function startSurprise() {
+
+    /*
+       The user taps this button,
+       so the browser allows music
+       to start from this action.
+    */
+
+    startSong();
+
+    showScreen(2);
+
+}
+
+
+/* =========================
+   SCREEN CHANGE
+========================= */
 
 function showScreen(number) {
 
     const oldScreen =
-        document.getElementById("screen" + currentScreen);
+        document.getElementById(
+            "screen" + currentScreen
+        );
 
     const newScreen =
-        document.getElementById("screen" + number);
+        document.getElementById(
+            "screen" + number
+        );
+
 
     if (!newScreen) {
         return;
     }
 
-    oldScreen.classList.remove("active");
+
+    if (oldScreen) {
+        oldScreen.classList.remove("active");
+    }
+
 
     setTimeout(() => {
 
@@ -51,42 +87,17 @@ function showScreen(number) {
         currentScreen = number;
 
     }, 300);
+
 }
 
 
-
-/* =================================
-   OPEN SURPRISE + START SONG
-================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const openingButton =
-        document.querySelector(".opening button");
-
-    if (openingButton) {
-
-        openingButton.addEventListener(
-            "click",
-            () => {
-
-                startSong();
-
-            }
-        );
-
-    }
-
-});
-
-
-
-/* =================================
-   LOVE QUESTION
-================================= */
+/* =========================
+   NO BUTTON
+========================= */
 
 const noButton =
     document.getElementById("noButton");
+
 
 const questionHint =
     document.getElementById("questionHint");
@@ -95,88 +106,126 @@ const questionHint =
 function moveNoButton() {
 
     const card =
-        document.querySelector(".question-card");
+        document.querySelector(
+            ".question-card"
+        );
+
+
+    if (!card || !noButton) {
+        return;
+    }
+
 
     const cardRect =
         card.getBoundingClientRect();
 
+
     const maxX =
-        Math.max(80, cardRect.width / 2 - 80);
+        Math.max(
+            80,
+            cardRect.width / 2 - 80
+        );
+
 
     const maxY =
-        Math.max(60, cardRect.height / 2 - 80);
+        Math.max(
+            60,
+            cardRect.height / 2 - 80
+        );
+
 
     const randomX =
         (Math.random() * 2 - 1) * maxX;
 
+
     const randomY =
         (Math.random() * 2 - 1) * maxY;
+
 
     noButton.style.transform =
         `translate(${randomX}px, ${randomY}px)`;
 
-    questionHint.innerHTML =
-        "Hmm… I don't think that button wants to be pressed 😏❤️";
+
+    if (questionHint) {
+
+        questionHint.innerHTML =
+            "Hmm… I don't think that button wants to be pressed 😏❤️";
+
+    }
+
 }
 
 
-noButton.addEventListener(
-    "mouseenter",
-    moveNoButton
-);
+/* Desktop */
+
+if (noButton) {
+
+    noButton.addEventListener(
+        "mouseenter",
+        moveNoButton
+    );
 
 
-noButton.addEventListener(
-    "touchstart",
-    function(event) {
+    noButton.addEventListener(
+        "click",
+        function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        moveNoButton();
+            moveNoButton();
 
-    },
-    {
-        passive: false
-    }
-);
+        }
+    );
 
 
-noButton.addEventListener(
-    "click",
-    function(event) {
+    /* Mobile */
 
-        event.preventDefault();
+    noButton.addEventListener(
+        "touchstart",
+        function(event) {
 
-        moveNoButton();
+            event.preventDefault();
 
-    }
-);
+            moveNoButton();
+
+        },
+        {
+            passive: false
+        }
+    );
+
+}
 
 
-
-/* =================================
-   YES ANSWER
-================================= */
+/* =========================
+   YES BUTTON
+========================= */
 
 function answerYes() {
 
-    questionHint.innerHTML =
-        "I knew you'd say YES, Baby. ❤️";
+    if (questionHint) {
+
+        questionHint.innerHTML =
+            "I knew you'd say YES, Baby. ❤️";
+
+    }
+
 
     createConfetti();
+
 
     setTimeout(() => {
 
         showScreen(6);
 
     }, 1500);
+
 }
 
 
-
-/* =================================
-   CAKE CELEBRATION
-================================= */
+/* =========================
+   CAKE
+========================= */
 
 function blowCandles() {
 
@@ -184,24 +233,41 @@ function blowCandles() {
         return;
     }
 
+
     cakeCelebrated = true;
 
 
     const candle =
-        document.getElementById("candle1");
+        document.getElementById(
+            "candle1"
+        );
+
 
     const text =
-        document.getElementById("candleText");
+        document.getElementById(
+            "candleText"
+        );
+
 
     const finalButton =
-        document.getElementById("finalButton");
+        document.getElementById(
+            "finalButton"
+        );
 
 
-    candle.classList.add("off");
+    if (candle) {
+
+        candle.classList.add("off");
+
+    }
 
 
-    text.innerHTML =
-        "Happy Birthday, Haifa! 🎉❤️";
+    if (text) {
+
+        text.innerHTML =
+            "Happy Birthday, Haifa! 🎉❤️";
+
+    }
 
 
     createConfetti();
@@ -211,19 +277,30 @@ function blowCandles() {
 
     setTimeout(() => {
 
-        finalButton.classList.add("show");
+        if (finalButton) {
 
-        text.innerHTML =
-            "Your wish is made, Baby. ✨❤️";
+            finalButton.classList.add(
+                "show"
+            );
+
+        }
+
+
+        if (text) {
+
+            text.innerHTML =
+                "Your wish is made, Baby. ✨❤️";
+
+        }
 
     }, 2500);
+
 }
 
 
-
-/* =================================
+/* =========================
    CONFETTI
-================================= */
+========================= */
 
 function createConfetti() {
 
@@ -232,13 +309,21 @@ function createConfetti() {
             "confetti-container"
         );
 
+
+    if (!container) {
+        return;
+    }
+
+
     const symbols = [
+
         "❤️",
         "💜",
         "✨",
         "🎉",
         "💗",
         "⭐"
+
     ];
 
 
@@ -249,7 +334,9 @@ function createConfetti() {
     ) {
 
         const piece =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         piece.className =
@@ -259,38 +346,29 @@ function createConfetti() {
         piece.innerText =
             symbols[
                 Math.floor(
-                    Math.random()
-                    *
+                    Math.random() *
                     symbols.length
                 )
             ];
 
 
         piece.style.left =
-            Math.random()
-            *
-            100
-            +
+            Math.random() *
+            100 +
             "vw";
 
 
         piece.style.fontSize =
             (
-                12
-                +
-                Math.random()
-                *
-                18
-            )
-            +
+                12 +
+                Math.random() * 18
+            ) +
             "px";
 
 
         piece.style.animationDelay =
-            Math.random()
-            *
-            1.5
-            +
+            Math.random() *
+            1.5 +
             "s";
 
 
