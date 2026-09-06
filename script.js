@@ -2,87 +2,28 @@ let currentScreen = 1;
 
 let cakeCelebrated = false;
 
-let musicStarted = false;
-
 
 /* =================================
-   ELEMENTS
+   SONG
 ================================= */
 
-const music =
-    document.getElementById("backgroundMusic");
-
-const musicButton =
-    document.getElementById("musicButton");
-
-const noButton =
-    document.getElementById("noButton");
-
-const questionHint =
-    document.getElementById("questionHint");
+const birthdaySong =
+    document.getElementById("birthdaySong");
 
 
-/* =================================
-   START SURPRISE + MUSIC
-================================= */
+function startSong() {
 
-function startSurprise() {
-
-    /* Start the music because this function
-       is triggered by the user's tap */
-
-    if (!musicStarted) {
-
-        music.play()
-            .then(() => {
-
-                musicStarted = true;
-
-                musicButton.innerHTML = "🔊";
-
-            })
-            .catch(() => {
-
-                musicButton.innerHTML = "🎵";
-
-            });
-
+    if (!birthdaySong) {
+        return;
     }
 
-    showScreen(2);
+    birthdaySong.volume = 0.7;
+
+    birthdaySong.play().catch(() => {
+        console.log("Song waiting for user interaction.");
+    });
 }
 
-
-/* =================================
-   MUSIC PLAY / PAUSE
-================================= */
-
-function toggleMusic() {
-
-    if (music.paused) {
-
-        music.play()
-            .then(() => {
-
-                musicStarted = true;
-
-                musicButton.innerHTML = "🔊";
-
-            })
-            .catch(() => {
-
-                musicButton.innerHTML = "🎵";
-
-            });
-
-    } else {
-
-        music.pause();
-
-        musicButton.innerHTML = "🔇";
-
-    }
-}
 
 
 /* =================================
@@ -92,98 +33,90 @@ function toggleMusic() {
 function showScreen(number) {
 
     const oldScreen =
-        document.getElementById(
-            "screen" + currentScreen
-        );
+        document.getElementById("screen" + currentScreen);
 
     const newScreen =
-        document.getElementById(
-            "screen" + number
-        );
-
+        document.getElementById("screen" + number);
 
     if (!newScreen) {
         return;
     }
 
+    oldScreen.classList.remove("active");
 
-    if (oldScreen) {
+    setTimeout(() => {
 
-        oldScreen.classList.remove(
-            "active"
+        newScreen.classList.add("active");
+
+        currentScreen = number;
+
+    }, 300);
+}
+
+
+
+/* =================================
+   OPEN SURPRISE + START SONG
+================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const openingButton =
+        document.querySelector(".opening button");
+
+    if (openingButton) {
+
+        openingButton.addEventListener(
+            "click",
+            () => {
+
+                startSong();
+
+            }
         );
 
     }
 
+});
 
-    setTimeout(() => {
-
-        newScreen.classList.add(
-            "active"
-        );
-
-        currentScreen =
-            number;
-
-    }, 300);
-}
 
 
 /* =================================
    LOVE QUESTION
 ================================= */
 
+const noButton =
+    document.getElementById("noButton");
+
+const questionHint =
+    document.getElementById("questionHint");
+
+
 function moveNoButton() {
 
     const card =
-        document.querySelector(
-            ".question-card"
-        );
-
-
-    if (!card || !noButton) {
-        return;
-    }
-
+        document.querySelector(".question-card");
 
     const cardRect =
         card.getBoundingClientRect();
 
-
     const maxX =
-        Math.max(
-            80,
-            cardRect.width / 2 - 80
-        );
-
+        Math.max(80, cardRect.width / 2 - 80);
 
     const maxY =
-        Math.max(
-            60,
-            cardRect.height / 2 - 80
-        );
-
+        Math.max(60, cardRect.height / 2 - 80);
 
     const randomX =
-        (Math.random() * 2 - 1)
-        * maxX;
-
+        (Math.random() * 2 - 1) * maxX;
 
     const randomY =
-        (Math.random() * 2 - 1)
-        * maxY;
-
+        (Math.random() * 2 - 1) * maxY;
 
     noButton.style.transform =
         `translate(${randomX}px, ${randomY}px)`;
 
-
-    if (questionHint) {
-
-        questionHint.innerHTML =
-            "Hmm… I don't think that button wants to be pressed 😏❤️";
-
-    }
+    questionHint.innerHTML =
+        "Hmm… I don't think that button wants to be pressed 😏❤️";
 }
 
 
@@ -220,22 +153,17 @@ noButton.addEventListener(
 );
 
 
+
 /* =================================
    YES ANSWER
 ================================= */
 
 function answerYes() {
 
-    if (questionHint) {
-
-        questionHint.innerHTML =
-            "I knew you'd say YES. ❤️";
-
-    }
-
+    questionHint.innerHTML =
+        "I knew you'd say YES, Baby. ❤️";
 
     createConfetti();
-
 
     setTimeout(() => {
 
@@ -243,6 +171,7 @@ function answerYes() {
 
     }, 1500);
 }
+
 
 
 /* =================================
@@ -255,62 +184,41 @@ function blowCandles() {
         return;
     }
 
-
     cakeCelebrated = true;
 
 
     const candle =
-        document.getElementById(
-            "candle1"
-        );
-
+        document.getElementById("candle1");
 
     const text =
-        document.getElementById(
-            "candleText"
-        );
-
+        document.getElementById("candleText");
 
     const finalButton =
-        document.getElementById(
-            "finalButton"
-        );
+        document.getElementById("finalButton");
 
 
-    /* Turn flame off */
+    candle.classList.add("off");
 
-    candle.classList.add(
-        "off"
-    );
-
-
-    /* Birthday message */
 
     text.innerHTML =
         "Happy Birthday, Haifa! 🎉❤️";
 
 
-    /* Celebration */
-
     createConfetti();
 
     createConfetti();
 
-
-    /* Show Continue after celebration */
 
     setTimeout(() => {
 
-        finalButton.classList.add(
-            "show"
-        );
-
+        finalButton.classList.add("show");
 
         text.innerHTML =
-            "Your wish is made. ✨❤️";
+            "Your wish is made, Baby. ✨❤️";
 
     }, 2500);
 }
+
 
 
 /* =================================
@@ -323,7 +231,6 @@ function createConfetti() {
         document.getElementById(
             "confetti-container"
         );
-
 
     const symbols = [
         "❤️",
@@ -342,9 +249,7 @@ function createConfetti() {
     ) {
 
         const piece =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         piece.className =
@@ -401,4 +306,5 @@ function createConfetti() {
         }, 4500);
 
     }
+
 }
