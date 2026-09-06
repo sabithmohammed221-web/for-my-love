@@ -7,21 +7,16 @@
 
     <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <title>Happy Birthday Haifa ❤️</title>
 
-    <link
-            rel="stylesheet"
-            href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <!-- BACKGROUND -->
 
@@ -30,7 +25,7 @@
 <div id="confetti-container"></div>
 
 
-<!-- PREMIUM BALLOONS -->
+<!-- BALLOONS -->
 
 <div class="balloons">
 
@@ -62,7 +57,9 @@
 </div>
 
 
-<!-- SCREEN 1 -->
+<!-- =========================
+     SCREEN 1
+========================== -->
 
 <section
         class="screen opening active"
@@ -76,12 +73,9 @@
     <h1>
         I made something
         <br>
-        <span>just for you.</span>
+        <span>special for you.</span>
     </h1>
 
-    <p class="name">
-        Baby
-    </p>
 
     <button onclick="showScreen(2)">
         Open Your Surprise ❤️
@@ -90,7 +84,9 @@
 </section>
 
 
-<!-- SCREEN 2 -->
+<!-- =========================
+     SCREEN 2
+========================== -->
 
 <section
         class="screen second-screen"
@@ -105,9 +101,6 @@
         Happy Birthday
     </h2>
 
-    <h3>
-        wifeyy🤗✨
-    </h3>
 
     <p class="message">
 
@@ -132,7 +125,9 @@
 </section>
 
 
-<!-- SCREEN 3 -->
+<!-- =========================
+     SCREEN 3
+========================== -->
 
 <section
         class="screen memory-screen"
@@ -157,7 +152,6 @@
 
 
     <div class="photo-grid">
-
 
         <div class="photo-card">
 
@@ -200,7 +194,6 @@
 
         </div>
 
-
     </div>
 
 
@@ -211,7 +204,9 @@
 </section>
 
 
-<!-- SCREEN 4 -->
+<!-- =========================
+     SCREEN 4
+========================== -->
 
 <section
         class="screen letter-screen"
@@ -263,6 +258,7 @@
             to know that you are deeply loved.
         </p>
 
+
     </div>
 
 
@@ -273,7 +269,9 @@
 </section>
 
 
-<!-- SCREEN 5 -->
+<!-- =========================
+     SCREEN 5
+========================== -->
 
 <section
         class="screen question-screen"
@@ -330,7 +328,7 @@
                 class="question-hint"
                 id="questionHint"
         >
-            Choose carefully, Baby 😌❤️
+            Choose carefully 😌❤️
         </p>
 
     </div>
@@ -338,60 +336,77 @@
 </section>
 
 
-<!-- SCREEN 6 -->
+<!-- =========================
+     SCREEN 6 - CAKE
+========================== -->
 
 <section
         class="screen cake-screen"
         id="screen6"
 >
 
-    <p class="small-text">
-        Make A Wish, Baby… ✨
-    </p>
+    <div class="cake-content">
 
-    <h2>
-        Your Special Day ❤️
-    </h2>
+        <p class="small-text">
+            Make A Wish, Baby… ✨
+        </p>
 
+        <h2>
+            Your Special Day ❤️
+        </h2>
 
-    <div class="cake">
 
         <div
-                class="candle"
-                id="candle1"
+                class="cake"
                 onclick="blowCandles()"
         >
 
-            <div class="flame"></div>
+            <div
+                    class="candle"
+                    id="candle1"
+            >
+
+                <div class="flame"></div>
+
+            </div>
+
+
+            <div class="cake-top"></div>
+
+            <div class="cake-middle"></div>
+
+            <div class="cake-bottom"></div>
+
+
+            <div class="cake-decoration decoration1"></div>
+
+            <div class="cake-decoration decoration2"></div>
+
+            <div class="cake-decoration decoration3"></div>
 
         </div>
 
 
-        <div class="cake-top"></div>
+        <p id="candleText">
+            Tap the flame ❤️
+        </p>
 
-        <div class="cake-middle"></div>
 
-        <div class="cake-bottom"></div>
+        <button
+                id="finalButton"
+                onclick="showScreen(7)"
+        >
+            Continue ❤️
+        </button>
 
     </div>
-
-
-    <p id="candleText">
-        Tap the flame, Baby ❤️
-    </p>
-
-
-    <button
-            id="finalButton"
-            onclick="showScreen(7)"
-    >
-        Continue ❤️
-    </button>
 
 </section>
 
 
-<!-- SCREEN 7 -->
+<!-- =========================
+     SCREEN 7
+========================== -->
 
 <section
         class="screen final-screen"
@@ -403,13 +418,17 @@
     </div>
 
     <p class="small-text">
-        Happy Birthday, Wifeyy ❤️
+        Happy Birthday ❤️
     </p>
 
     <h1>
+
         I Love You,
+
         <br>
+
         <span>Haifa.</span>
+
     </h1>
 
     <p class="final-message">
@@ -428,10 +447,6 @@
         in my heart. ❤️
 
     </p>
-
-    <div class="final-sparkles">
-        ✨ ❤️ ✨ ❤️ ✨
-    </div>
 
 </section>
 
