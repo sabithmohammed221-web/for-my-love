@@ -10,16 +10,22 @@ let cakeCelebrated = false;
 function showScreen(number) {
 
     const oldScreen =
-        document.getElementById("screen" + currentScreen);
+        document.getElementById(
+            "screen" + currentScreen
+        );
 
     const newScreen =
-        document.getElementById("screen" + number);
+        document.getElementById(
+            "screen" + number
+        );
 
     if (!newScreen) {
         return;
     }
 
-    oldScreen.classList.remove("active");
+    if (oldScreen) {
+        oldScreen.classList.remove("active");
+    }
 
     setTimeout(() => {
 
@@ -27,13 +33,20 @@ function showScreen(number) {
 
         currentScreen = number;
 
-    }, 300);
+        if (
+            number === 3 ||
+            number === 4 ||
+            number === 6
+        ) {
+            newScreen.scrollTop = 0;
+        }
+
+    }, 250);
 }
 
 
-
 /* =================================
-   LOVE QUESTION
+   NO BUTTON
 ================================= */
 
 const noButton =
@@ -46,22 +59,36 @@ const questionHint =
 function moveNoButton() {
 
     const card =
-        document.querySelector(".question-card");
+        document.querySelector(
+            ".question-card"
+        );
+
+    if (!card || !noButton) {
+        return;
+    }
 
     const cardRect =
         card.getBoundingClientRect();
 
     const maxX =
-        Math.max(80, cardRect.width / 2 - 80);
+        Math.max(
+            70,
+            cardRect.width / 2 - 75
+        );
 
     const maxY =
-        Math.max(60, cardRect.height / 2 - 80);
+        Math.max(
+            50,
+            cardRect.height / 2 - 70
+        );
 
     const randomX =
-        (Math.random() * 2 - 1) * maxX;
+        (Math.random() * 2 - 1)
+        * maxX;
 
     const randomY =
-        (Math.random() * 2 - 1) * maxY;
+        (Math.random() * 2 - 1)
+        * maxY;
 
     noButton.style.transform =
         `translate(${randomX}px, ${randomY}px)`;
@@ -71,38 +98,38 @@ function moveNoButton() {
 }
 
 
-noButton.addEventListener(
-    "mouseenter",
-    moveNoButton
-);
+if (noButton) {
 
+    noButton.addEventListener(
+        "mouseenter",
+        moveNoButton
+    );
 
-noButton.addEventListener(
-    "touchstart",
-    function(event) {
+    noButton.addEventListener(
+        "touchstart",
+        function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        moveNoButton();
+            moveNoButton();
 
-    },
-    {
-        passive: false
-    }
-);
+        },
+        {
+            passive: false
+        }
+    );
 
+    noButton.addEventListener(
+        "click",
+        function(event) {
 
-noButton.addEventListener(
-    "click",
-    function(event) {
+            event.preventDefault();
 
-        event.preventDefault();
+            moveNoButton();
 
-        moveNoButton();
-
-    }
-);
-
+        }
+    );
+}
 
 
 /* =================================
@@ -124,14 +151,11 @@ function answerYes() {
 }
 
 
-
 /* =================================
    CAKE CELEBRATION
 ================================= */
 
 function blowCandles() {
-
-    /* Prevent celebrating twice */
 
     if (cakeCelebrated) {
         return;
@@ -141,13 +165,19 @@ function blowCandles() {
 
 
     const candle =
-        document.getElementById("candle1");
+        document.getElementById(
+            "candle1"
+        );
 
     const text =
-        document.getElementById("candleText");
+        document.getElementById(
+            "candleText"
+        );
 
     const finalButton =
-        document.getElementById("finalButton");
+        document.getElementById(
+            "finalButton"
+        );
 
 
     /* Turn off flame */
@@ -155,31 +185,30 @@ function blowCandles() {
     candle.classList.add("off");
 
 
-    /* Celebration message */
+    /* Celebration */
 
     text.innerHTML =
         "Happy Birthday, Haifa! 🎉❤️";
 
 
-    /* Big celebration */
-
     createConfetti();
 
     createConfetti();
 
 
-    /* Show Continue only AFTER celebration */
+    /* Continue appears after celebration */
 
     setTimeout(() => {
 
-        finalButton.classList.add("show");
+        finalButton.classList.add(
+            "show"
+        );
 
         text.innerHTML =
-            "Your wish is made, Baby. ✨❤️";
+            "Your wish is made. ✨❤️";
 
     }, 2500);
 }
-
 
 
 /* =================================
@@ -194,14 +223,12 @@ function createConfetti() {
         );
 
     const symbols = [
-
         "❤️",
         "💜",
         "✨",
         "🎉",
         "💗",
         "⭐"
-
     ];
 
 
@@ -212,7 +239,9 @@ function createConfetti() {
     ) {
 
         const piece =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         piece.className =
@@ -231,8 +260,7 @@ function createConfetti() {
 
         piece.style.left =
             Math.random()
-            *
-            100
+            * 100
             +
             "vw";
 
@@ -242,8 +270,7 @@ function createConfetti() {
                 12
                 +
                 Math.random()
-                *
-                18
+                * 18
             )
             +
             "px";
@@ -251,13 +278,14 @@ function createConfetti() {
 
         piece.style.animationDelay =
             Math.random()
-            *
-            1.5
+            * 1.5
             +
             "s";
 
 
-        container.appendChild(piece);
+        container.appendChild(
+            piece
+        );
 
 
         setTimeout(() => {
@@ -267,5 +295,4 @@ function createConfetti() {
         }, 4500);
 
     }
-
 }
