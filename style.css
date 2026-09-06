@@ -1583,3 +1583,170 @@ button:hover {
     pointer-events: auto;
     transform: scale(1);
 }
+/* =========================================
+   PHONE DISPLAY FIXES
+========================================= */
+
+@media (max-width: 650px) {
+
+    /* ---------- LOVE LETTER ---------- */
+
+    .letter-screen {
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        padding-top: 55px;
+        padding-bottom: 50px;
+    }
+
+    .letter {
+        width: 94%;
+        max-height: none;
+        padding: 28px 20px 35px;
+
+        margin: 0 auto;
+    }
+
+    .letter h2 {
+        font-size: 40px;
+        line-height: 1.15;
+        margin-bottom: 22px;
+    }
+
+    .letter p:not(.small-text) {
+        font-size: 17px;
+        line-height: 1.65;
+    }
+
+
+    /* ---------- CAKE SCREEN ---------- */
+
+    .cake-screen {
+        justify-content: flex-start;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        padding-top: 55px;
+        padding-bottom: 50px;
+    }
+
+    .cake-screen h2 {
+        font-size: 40px;
+        line-height: 1.15;
+        margin-bottom: 5px;
+    }
+
+    .cake {
+        width: 260px;
+        height: 210px;
+        margin-top: 35px;
+        transform: scale(.92);
+    }
+
+
+    /* Make the cake much brighter */
+
+    .cake-bottom {
+        width: 245px;
+        height: 75px;
+
+        background:
+            linear-gradient(
+                to bottom,
+                #d878ff 0%,
+                #a43bd0 50%,
+                #69219a 100%
+            );
+
+        box-shadow:
+            0 12px 30px rgba(0,0,0,.45),
+            0 0 25px rgba(203,92,255,.35);
+    }
+
+    .cake-middle {
+        width: 210px;
+        height: 55px;
+
+        background:
+            linear-gradient(
+                to bottom,
+                #f0a8ff 0%,
+                #c85ae8 55%,
+                #9634b9 100%
+            );
+    }
+
+    .cake-top {
+        width: 175px;
+        height: 48px;
+
+        background:
+            linear-gradient(
+                to bottom,
+                #ffd1ff 0%,
+                #ed8fff 45%,
+                #bd4edc 100%
+            );
+
+        box-shadow:
+            0 0 18px rgba(239,139,255,.35);
+    }
+
+
+    /* Candle */
+
+    .candle {
+        width: 15px;
+        height: 58px;
+
+        background:
+            repeating-linear-gradient(
+                45deg,
+                #ffffff 0px,
+                #ffffff 6px,
+                #d99aff 6px,
+                #d99aff 12px
+            );
+
+        box-shadow:
+            0 0 8px rgba(255,255,255,.25);
+    }
+
+
+    /* Flame */
+
+    .flame {
+        width: 19px;
+        height: 27px;
+
+        background:
+            radial-gradient(
+                circle at 50% 65%,
+                #fff5a3 0%,
+                #ffd34e 35%,
+                #ff8c00 70%,
+                #ff5c00 100%
+            );
+
+        box-shadow:
+            0 0 12px #ffd34e,
+            0 0 28px #ff9d00,
+            0 0 45px rgba(255,130,0,.7);
+    }
+
+    #candleText {
+        font-size: 17px;
+        margin-top: 5px;
+    }
+
+
+    /* ---------- GENERAL PHONE SPACING ---------- */
+
+    .screen {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+}
