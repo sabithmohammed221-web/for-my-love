@@ -875,118 +875,160 @@ button:active {
     font-style: italic;
 }
 
+/* ================================
+   CAKE SCREEN - PHONE FIX
+================================ */
+
+.cake-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100svh;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px 15px;
+}
+
+
+/* CONTENT */
+
+.cake-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* TOP TEXT */
+
+.cake-screen .small-text {
+    font-size: 18px;
+
+    margin: 0 0 10px;
+
+    color: #f2d5ff;
+
+    letter-spacing: 1.5px;
+
+    text-shadow:
+        0 0 15px rgba(220,130,255,.6);
+}
+
+
+/* TITLE */
+
+.cake-screen h2 {
+    font-size: clamp(38px, 10vw, 65px);
+
+    line-height: 1.05;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.35),
+        0 0 35px rgba(205,80,255,.5);
+}
+
 
 /* ================================
    CAKE
 ================================ */
 
-.cake-screen {
-    overflow-y: auto;
-
-    justify-content: flex-start;
-
-    padding-top: 45px;
-    padding-bottom: 40px;
-}
-
-.cake-content {
-    width: 100%;
-
-    min-height: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: flex-start;
-}
-
-.cake-screen .small-text {
-    margin-bottom: 12px;
-}
-
-.cake-screen h2 {
-    margin-bottom: 5px;
-
-    font-size:
-        clamp(38px, 8vw, 65px);
-}
-
-
-/* CAKE */
-
 .cake {
     position: relative;
 
     width: 300px;
-    height: 270px;
+    height: 280px;
 
-    margin-top: 18px;
+    margin: 5px auto 0;
 
     flex-shrink: 0;
 
     cursor: pointer;
 
+    display: block;
+
     filter:
         drop-shadow(
-            0 15px 20px
-            rgba(0,0,0,.35)
+            0 15px 25px
+            rgba(0,0,0,.45)
         );
 }
 
 
-/* BOTTOM */
+/* ================================
+   BOTTOM CAKE
+================================ */
 
 .cake-bottom {
     position: absolute;
 
     left: 50%;
-    bottom: 20px;
+    bottom: 25px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     width: 270px;
     height: 82px;
 
     border-radius:
-        14px 14px 24px 24px;
+        12px 12px 25px 25px;
 
     background:
         linear-gradient(
             to bottom,
-            #ff9ee2 0%,
-            #dc64df 50%,
-            #8428a8 100%
+            #ffb4e9 0%,
+            #f078d7 45%,
+            #c83bb8 100%
         );
 
     border:
         2px solid
-        rgba(255,255,255,.35);
+        rgba(255,255,255,.5);
 
     box-shadow:
+        inset 0 8px 15px
+        rgba(255,255,255,.18),
+
+        inset 0 -12px 18px
+        rgba(80,0,80,.2),
+
         0 12px 30px
-        rgba(0,0,0,.5),
+        rgba(0,0,0,.45),
 
         0 0 35px
-        rgba(220,90,255,.5);
+        rgba(240,90,220,.35);
 
     z-index: 2;
 }
 
 
-/* MIDDLE */
+/* ================================
+   MIDDLE CAKE
+================================ */
 
 .cake-middle {
     position: absolute;
 
     left: 50%;
-    bottom: 84px;
+    bottom: 90px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     width: 225px;
     height: 62px;
@@ -996,109 +1038,119 @@ button:active {
     background:
         linear-gradient(
             to bottom,
-            #ffd0f3,
-            #e879e7 55%,
-            #a83dc1 100%
+            #ffe5f8 0%,
+            #ffb1e8 45%,
+            #df62d1 100%
         );
 
     border:
         2px solid
-        rgba(255,255,255,.35);
+        rgba(255,255,255,.55);
 
     box-shadow:
-        0 8px 22px
-        rgba(0,0,0,.4);
+        inset 0 7px 12px
+        rgba(255,255,255,.3),
+
+        inset 0 -10px 15px
+        rgba(100,0,90,.15),
+
+        0 8px 20px
+        rgba(0,0,0,.35);
 
     z-index: 3;
 }
 
 
-/* TOP */
+/* ================================
+   TOP OF CAKE
+================================ */
 
 .cake-top {
     position: absolute;
 
     left: 50%;
-    bottom: 134px;
+    bottom: 140px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     width: 190px;
-    height: 52px;
+    height: 55px;
 
     border-radius: 50%;
 
     background:
         linear-gradient(
             to bottom,
-            #fff5fd 0%,
-            #ffb1e6 55%,
-            #cf55d5 100%
+            #ffffff 0%,
+            #ffe1f5 45%,
+            #ff9cdd 100%
         );
 
     border:
         2px solid
-        rgba(255,255,255,.4);
+        rgba(255,255,255,.65);
 
     box-shadow:
-        0 5px 25px
-        rgba(255,100,230,.4);
+        inset 0 5px 10px
+        rgba(255,255,255,.5),
+
+        0 5px 20px
+        rgba(255,100,230,.45);
 
     z-index: 4;
 }
 
 
-/* DECORATIONS */
+/* ================================
+   CAKE DECORATIONS
+================================ */
 
 .cake-decoration {
     position: absolute;
 
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
 
     border-radius: 50%;
 
-    background:
-        #fff3ff;
+    background: #ffffff;
 
     box-shadow:
         0 0 10px
-        rgba(255,255,255,.7);
+        rgba(255,255,255,.8);
 
-    z-index: 6;
+    z-index: 7;
 }
 
 .decoration1 {
-    left: 95px;
+    left: 93px;
     bottom: 115px;
 }
 
 .decoration2 {
-    left: 142px;
-    bottom: 106px;
+    left: 143px;
+    bottom: 108px;
 }
 
 .decoration3 {
-    left: 190px;
+    left: 192px;
     bottom: 115px;
 }
 
 
-/* CANDLE */
+/* ================================
+   CANDLE
+================================ */
 
 .candle {
     position: absolute;
 
-    z-index: 10;
-
     left: 50%;
-    bottom: 166px;
+    bottom: 172px;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    width: 19px;
+    width: 20px;
     height: 68px;
 
     border-radius: 6px;
@@ -1108,30 +1160,34 @@ button:active {
             45deg,
             #ffffff 0px,
             #ffffff 7px,
-            #d66cff 7px,
-            #d66cff 14px
+            #c95cff 7px,
+            #c95cff 14px
         );
 
     border:
-        1px solid
-        rgba(255,255,255,.6);
+        2px solid
+        rgba(255,255,255,.7);
 
     box-shadow:
         0 0 15px
-        rgba(255,255,255,.3);
+        rgba(255,255,255,.4);
+
+    z-index: 10;
 }
 
 
-/* FLAME */
+/* ================================
+   FLAME
+================================ */
 
 .flame {
     position: absolute;
 
-    width: 27px;
-    height: 37px;
+    width: 28px;
+    height: 38px;
 
-    top: -35px;
-    left: -4px;
+    left: -5px;
+    top: -36px;
 
     border-radius:
         50% 50% 50% 0;
@@ -1139,20 +1195,19 @@ button:active {
     background:
         radial-gradient(
             circle at 50% 65%,
-            #fff7b0 0%,
-            #ffd34d 35%,
-            #ff8c00 70%,
+            #fffbd0 0%,
+            #ffe15a 30%,
+            #ff9d00 65%,
             #ff4d00 100%
         );
 
-    transform:
-        rotate(-45deg);
+    transform: rotate(-45deg);
 
     box-shadow:
-        0 0 15px #ffd34d,
-        0 0 30px #ff9800,
+        0 0 15px #ffe45c,
+        0 0 30px #ff9d00,
         0 0 55px
-        rgba(255,120,0,.8);
+        rgba(255,120,0,.9);
 
     animation:
         flame
@@ -1160,6 +1215,7 @@ button:active {
         ease-in-out
         infinite alternate;
 }
+
 
 @keyframes flame {
 
@@ -1172,35 +1228,42 @@ button:active {
     to {
         transform:
             rotate(-45deg)
-            scale(1.1);
+            scale(1.12);
     }
 }
+
 
 .candle.off .flame {
     display: none;
 }
 
 
-/* CAKE TEXT */
+/* ================================
+   CAKE TEXT
+================================ */
 
 #candleText {
-    margin-top: 0;
+    margin: 5px 0 0;
 
-    font-size: 18px;
+    font-size: 19px;
 
-    line-height: 1.5;
+    color: #ffffff;
 
-    color: white;
+    line-height: 1.4;
 
     text-shadow:
         0 0 15px
-        rgba(255,150,255,.7);
+        rgba(255,130,240,.8);
 }
 
 
-/* CONTINUE */
+/* ================================
+   CONTINUE BUTTON
+================================ */
 
 #finalButton {
+    margin-top: 18px;
+
     opacity: 0;
 
     visibility: hidden;
@@ -1209,13 +1272,12 @@ button:active {
 
     transform: scale(.8);
 
-    margin-top: 22px;
-
     transition:
         opacity .6s ease,
         transform .6s ease,
         visibility .6s ease;
 }
+
 
 #finalButton.show {
     opacity: 1;
@@ -1227,6 +1289,105 @@ button:active {
     transform: scale(1);
 }
 
+
+/* ================================
+   PHONE
+================================ */
+
+@media (max-width: 650px) {
+
+    .cake-screen {
+        padding:
+            15px 10px;
+    }
+
+    .cake-content {
+        justify-content: center;
+    }
+
+    .cake-screen .small-text {
+        font-size: 17px;
+    }
+
+    .cake-screen h2 {
+        font-size: 38px;
+    }
+
+    .cake {
+        width: 300px;
+        height: 270px;
+
+        margin-top: 0;
+    }
+
+    .cake-bottom {
+        width: 260px;
+        height: 78px;
+
+        bottom: 25px;
+    }
+
+    .cake-middle {
+        width: 218px;
+        height: 60px;
+
+        bottom: 87px;
+    }
+
+    .cake-top {
+        width: 184px;
+        height: 52px;
+
+        bottom: 137px;
+    }
+
+    .candle {
+        bottom: 168px;
+
+        width: 19px;
+        height: 66px;
+    }
+
+    #candleText {
+        font-size: 17px;
+
+        margin-top: 2px;
+    }
+}
+
+
+/* ================================
+   VERY SMALL PHONE
+================================ */
+
+@media (max-width: 380px) {
+
+    .cake-screen .small-text {
+        font-size: 15px;
+
+        margin-bottom: 7px;
+    }
+
+    .cake-screen h2 {
+        font-size: 34px;
+    }
+
+    .cake {
+        transform: scale(.88);
+
+        transform-origin:
+            center center;
+
+        margin-top: -5px;
+
+        margin-bottom: -25px;
+    }
+
+    #candleText {
+        font-size: 16px;
+    }
+
+}
 
 /* ================================
    FINAL
