@@ -1,84 +1,73 @@
 let currentScreen = 1;
-
 let cakeCelebrated = false;
 
 
-/* =========================
+/* ==============================
    MUSIC
-========================= */
+============================== */
 
-const birthdaySong =
-    document.getElementById("birthdaySong");
+const birthdaySong = document.getElementById("birthdaySong");
 
 
 function startSong() {
 
     if (!birthdaySong) {
+        console.log("Song element not found");
         return;
     }
 
     birthdaySong.volume = 0.7;
 
-    birthdaySong.play()
-        .then(() => {
+    const playPromise = birthdaySong.play();
 
-            console.log("Song started successfully.");
+    if (playPromise !== undefined) {
 
-        })
-        .catch((error) => {
+        playPromise
+            .then(() => {
+                console.log("🎵 Song started successfully");
+            })
+            .catch((error) => {
+                console.log("🎵 Song error:", error);
+            });
 
-            console.log("Song could not start:", error);
-
-        });
-
+    }
 }
 
 
-/* =========================
-   START SURPRISE
-========================= */
+/* ==============================
+   OPEN SURPRISE
+============================== */
 
 function startSurprise() {
 
-    /*
-       The user taps this button,
-       so the browser allows music
-       to start from this action.
-    */
-
+    // Start music from the user's button tap
     startSong();
 
+    // Open birthday screen
     showScreen(2);
 
 }
 
 
-/* =========================
+/* ==============================
    SCREEN CHANGE
-========================= */
+============================== */
 
 function showScreen(number) {
 
     const oldScreen =
-        document.getElementById(
-            "screen" + currentScreen
-        );
+        document.getElementById("screen" + currentScreen);
 
     const newScreen =
-        document.getElementById(
-            "screen" + number
-        );
-
+        document.getElementById("screen" + number);
 
     if (!newScreen) {
         return;
     }
 
-
     if (oldScreen) {
         oldScreen.classList.remove("active");
     }
-
 
     setTimeout(() => {
 
@@ -91,13 +80,12 @@ function showScreen(number) {
 }
 
 
-/* =========================
+/* ==============================
    NO BUTTON
-========================= */
+============================== */
 
 const noButton =
     document.getElementById("noButton");
-
 
 const questionHint =
     document.getElementById("questionHint");
@@ -105,46 +93,34 @@ const questionHint =
 
 function moveNoButton() {
 
-    const card =
-        document.querySelector(
-            ".question-card"
-        );
-
-
-    if (!card || !noButton) {
+    if (!noButton) {
         return;
     }
 
+    const card =
+        document.querySelector(".question-card");
+
+    if (!card) {
+        return;
+    }
 
     const cardRect =
         card.getBoundingClientRect();
 
-
     const maxX =
-        Math.max(
-            80,
-            cardRect.width / 2 - 80
-        );
-
+        Math.max(80, cardRect.width / 2 - 80);
 
     const maxY =
-        Math.max(
-            60,
-            cardRect.height / 2 - 80
-        );
-
+        Math.max(60, cardRect.height / 2 - 80);
 
     const randomX =
         (Math.random() * 2 - 1) * maxX;
 
-
     const randomY =
         (Math.random() * 2 - 1) * maxY;
 
-
     noButton.style.transform =
         `translate(${randomX}px, ${randomY}px)`;
-
 
     if (questionHint) {
 
@@ -156,29 +132,12 @@ function moveNoButton() {
 }
 
 
-/* Desktop */
-
 if (noButton) {
 
     noButton.addEventListener(
         "mouseenter",
         moveNoButton
     );
-
-
-    noButton.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            moveNoButton();
-
-        }
-    );
-
-
-    /* Mobile */
 
     noButton.addEventListener(
         "touchstart",
@@ -194,12 +153,23 @@ if (noButton) {
         }
     );
 
+    noButton.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            moveNoButton();
+
+        }
+    );
+
 }
 
 
-/* =========================
+/* ==============================
    YES BUTTON
-========================= */
+============================== */
 
 function answerYes() {
 
@@ -210,9 +180,7 @@ function answerYes() {
 
     }
 
-
     createConfetti();
-
 
     setTimeout(() => {
 
@@ -223,9 +191,9 @@ function answerYes() {
 }
 
 
-/* =========================
+/* ==============================
    CAKE
-========================= */
+============================== */
 
 function blowCandles() {
 
@@ -233,34 +201,22 @@ function blowCandles() {
         return;
     }
 
-
     cakeCelebrated = true;
 
-
     const candle =
-        document.getElementById(
-            "candle1"
-        );
-
+        document.getElementById("candle1");
 
     const text =
-        document.getElementById(
-            "candleText"
-        );
-
+        document.getElementById("candleText");
 
     const finalButton =
-        document.getElementById(
-            "finalButton"
-        );
-
+        document.getElementById("finalButton");
 
     if (candle) {
 
         candle.classList.add("off");
 
     }
-
 
     if (text) {
 
@@ -269,22 +225,16 @@ function blowCandles() {
 
     }
 
-
     createConfetti();
-
     createConfetti();
-
 
     setTimeout(() => {
 
         if (finalButton) {
 
-            finalButton.classList.add(
-                "show"
-            );
+            finalButton.classList.add("show");
 
         }
-
 
         if (text) {
 
@@ -298,9 +248,9 @@ function blowCandles() {
 }
 
 
-/* =========================
+/* ==============================
    CONFETTI
-========================= */
+============================== */
 
 function createConfetti() {
 
@@ -309,39 +259,26 @@ function createConfetti() {
             "confetti-container"
         );
 
-
     if (!container) {
         return;
     }
 
-
     const symbols = [
-
         "❤️",
         "💜",
         "✨",
         "🎉",
         "💗",
         "⭐"
-
     ];
 
-
-    for (
-        let i = 0;
-        i < 100;
-        i++
-    ) {
+    for (let i = 0; i < 100; i++) {
 
         const piece =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         piece.className =
             "confetti";
-
 
         piece.innerText =
             symbols[
@@ -351,31 +288,16 @@ function createConfetti() {
                 )
             ];
 
-
         piece.style.left =
-            Math.random() *
-            100 +
-            "vw";
-
+            Math.random() * 100 + "vw";
 
         piece.style.fontSize =
-            (
-                12 +
-                Math.random() * 18
-            ) +
-            "px";
-
+            (12 + Math.random() * 18) + "px";
 
         piece.style.animationDelay =
-            Math.random() *
-            1.5 +
-            "s";
+            Math.random() * 1.5 + "s";
 
-
-        container.appendChild(
-            piece
-        );
-
+        container.appendChild(piece);
 
         setTimeout(() => {
 
