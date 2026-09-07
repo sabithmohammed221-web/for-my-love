@@ -1,12 +1,9 @@
-```css
-/* =========================================
-   BASIC RESET
-========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html,
@@ -16,85 +13,105 @@ body {
 }
 
 body {
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #241525 0%,
-            #100b13 45%,
-            #050507 100%
-        );
-
-    color: #ffffff;
-
+    background: #070509;
+    color: white;
+    font-family: "DM Sans", sans-serif;
     overflow-x: hidden;
 }
 
 
-/* =========================================
+/* =========================
    BACKGROUND
-========================================= */
+========================= */
 
-.stars {
+.background {
     position: fixed;
     inset: 0;
+    z-index: 0;
+    overflow: hidden;
 
-    pointer-events: none;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #241522 0%,
+            #0d0810 45%,
+            #050406 100%
+        );
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
 
     background-image:
-        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,.5) 1px, transparent 1px);
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.7) 1px,
+            transparent 1px
+        );
 
-    background-size:
-        90px 90px,
-        150px 150px;
+    background-size: 85px 85px;
 
-    background-position:
-        0 0,
-        40px 60px;
+    opacity: .28;
+}
 
-    opacity: .35;
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .22;
+}
 
-    z-index: 0;
+.glow-one {
+    width: 450px;
+    height: 450px;
+    background: #8c416f;
+    left: -200px;
+    top: 15%;
+}
+
+.glow-two {
+    width: 450px;
+    height: 450px;
+    background: #493678;
+    right: -200px;
+    bottom: -100px;
 }
 
 
-/* =========================================
-   SCREENS
-========================================= */
+/* =========================
+   SCREEN
+========================= */
 
 .screen {
     position: relative;
+    z-index: 2;
 
     width: 100%;
-    min-height: 100vh;
 
-    padding:
-        70px 25px
-        50px;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    padding: 30px 20px;
 
     display: none;
 
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
+    flex-direction: column;
+
     text-align: center;
-
-    z-index: 2;
-
-    animation: screenIn .8s ease;
 }
 
 .screen.active {
     display: flex;
+
+    animation:
+        screenAppear .65s ease both;
 }
 
-@keyframes screenIn {
+@keyframes screenAppear {
 
     from {
         opacity: 0;
@@ -108,137 +125,73 @@ body {
 }
 
 
-/* =========================================
+/* =========================
    TEXT
-========================================= */
+========================= */
 
-.small-text {
-    font-size: 15px;
-
+.eyebrow {
+    font-size: 11px;
     letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    opacity: .8;
-
-    margin-bottom: 18px;
+    color: #d5c8d0;
+    margin-bottom: 16px;
 }
 
 h1,
 h2 {
-    font-weight: normal;
-
-    text-shadow:
-        0 0 20px rgba(255,255,255,.12);
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
 }
 
 h1 {
-    font-size: clamp(40px, 8vw, 75px);
-
-    line-height: 1.1;
-
-    margin-bottom: 20px;
-}
-
-h1 span,
-h2 span {
-    font-style: italic;
+    font-size: clamp(45px, 7vw, 80px);
+    line-height: .95;
 }
 
 h2 {
-    font-size: clamp(35px, 7vw, 60px);
-
-    margin-bottom: 25px;
+    font-size: clamp(40px, 7vw, 65px);
+    line-height: 1;
+    margin-bottom: 22px;
 }
 
-.name {
-    font-size: 30px;
-
+h1 span {
+    color: #e5a3c1;
     font-style: italic;
+}
 
-    margin-bottom: 35px;
-
-    letter-spacing: 3px;
+p {
+    color: #c9bdc4;
+    line-height: 1.7;
 }
 
 
-/* =========================================
-   BUTTONS
-========================================= */
-
-.main-button,
-.yes-button,
-.no-button {
-
-    border: none;
-
-    border-radius: 50px;
-
-    padding:
-        15px
-        28px;
-
-    font-family: inherit;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
-
-    color: #fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8d4f82,
-            #4e294f
-        );
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.35),
-        0 0 25px rgba(160,80,150,.18);
-}
-
-.main-button:hover,
-.yes-button:hover {
-    transform: translateY(-3px) scale(1.03);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.4),
-        0 0 30px rgba(220,120,200,.3);
-}
-
-.main-button:active,
-.yes-button:active,
-.no-button:active {
-    transform: scale(.96);
-}
-
-
-/* =========================================
+/* =========================
    SCREEN 1
-========================================= */
+========================= */
 
 .opening {
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(100,40,100,.15),
-            transparent 60%
-        );
+    width: 100%;
+    max-width: 950px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.glow-heart {
-    font-size: 60px;
+.heart {
+    color: #e5a3c1;
 
-    margin-bottom: 20px;
+    font-size: 55px;
 
-    animation:
-        heartBeat 1.5s infinite;
+    margin-bottom: 18px;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(229,163,193,.45)
+        );
+
+    animation: heartBeat 1.5s infinite;
 }
 
 @keyframes heartBeat {
@@ -249,217 +202,286 @@ h2 {
     }
 
     50% {
-        transform: scale(1.15);
+        transform: scale(1.14);
     }
 }
 
+.opening h1 {
+    margin: 0;
+}
 
-/* =========================================
-   SCREEN 2
-========================================= */
+.name {
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-.message-box {
-    max-width: 650px;
+    font-size: 28px;
 
-    margin-bottom: 35px;
+    letter-spacing: 3px;
 
-    padding: 30px;
+    margin:
+        20px 0
+        24px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.main-btn,
+.yes-btn,
+.no-btn {
+
+    border: 1px solid
+        rgba(255,255,255,.15);
+
+    border-radius: 999px;
+
+    min-height: 50px;
+
+    padding:
+        0 25px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a45c89,
+            #543057
+        );
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.35);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.main-btn:hover,
+.yes-btn:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0,0,0,.45);
+}
+
+
+/* =========================
+   GLASS CARD
+========================= */
+
+.glass-card,
+.question-card,
+.letter {
+
+    width:
+        min(680px, 100%);
+
+    background:
+        rgba(255,255,255,.045);
 
     border:
         1px solid
-        rgba(255,255,255,.1);
+        rgba(255,255,255,.11);
 
-    border-radius: 25px;
+    border-radius: 28px;
 
-    background:
-        rgba(255,255,255,.035);
+    backdrop-filter:
+        blur(18px);
 
-    backdrop-filter: blur(10px);
-
-    line-height: 1.8;
-
-    font-size: 18px;
-}
-
-.message-box p {
-    margin-bottom: 20px;
-}
-
-.message-box p:last-child {
-    margin-bottom: 0;
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.4);
 }
 
 
-/* =========================================
-   SCREEN 3 — MEMORIES
-========================================= */
+/* =========================
+   SCREEN 2
+========================= */
 
-.memory-intro {
+.glass-card {
+    padding: 45px 30px;
+}
+
+.glass-card p {
     font-size: 17px;
-
-    line-height: 1.7;
-
-    margin-bottom: 30px;
-
-    opacity: .85;
+    margin-bottom: 14px;
 }
 
-.photo-grid {
-    width: 100%;
-    max-width: 900px;
+.little-star {
+    color: #e5a3c1;
+    margin: 20px;
+}
+
+.glass-card .main-btn {
+    margin-top: 15px;
+}
+
+
+/* =========================
+   MEMORIES
+========================= */
+
+.heading {
+    max-width: 700px;
+    margin-bottom: 28px;
+}
+
+.heading p {
+    font-size: 16px;
+}
+
+.photos {
+
+    width:
+        min(950px, 100%);
 
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 20px;
+    gap: 18px;
 
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .photo-card {
 
-    padding: 10px;
-
-    border-radius: 20px;
+    padding: 8px;
 
     background:
-        rgba(255,255,255,.05);
+        rgba(255,255,255,.045);
 
     border:
         1px solid
         rgba(255,255,255,.1);
 
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.3);
+
     transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+        transform .3s;
 }
 
 .photo-card:hover {
     transform:
-        translateY(-8px)
-        rotate(1deg);
-
-    box-shadow:
-        0 20px 40px rgba(0,0,0,.4);
+        translateY(-7px);
 }
 
 .photo-card img {
 
     width: 100%;
 
-    height: 280px;
+    height: 290px;
 
     object-fit: cover;
 
-    border-radius: 15px;
-
     display: block;
+
+    border-radius: 14px;
 }
 
 .photo-card p {
 
-    padding: 15px 5px 8px;
+    padding:
+        12px 4px 6px;
 
-    font-size: 15px;
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-    font-style: italic;
+    font-size: 18px;
+
+    color: #eee;
 }
 
 
-/* =========================================
-   SCREEN 4 — LETTER
-========================================= */
+/* =========================
+   LETTER
+========================= */
 
 .letter {
-
-    width: 100%;
-    max-width: 650px;
-
-    padding: 40px;
-
-    margin-bottom: 30px;
-
+    overflow: hidden;
     text-align: left;
+    margin-bottom: 25px;
+}
 
-    border-radius: 25px;
+.letter-head {
 
-    background:
-        rgba(255,255,255,.045);
+    text-align: center;
 
-    border:
+    padding:
+        35px 25px
+        28px;
+
+    border-bottom:
         1px solid
         rgba(255,255,255,.1);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
-
-    backdrop-filter: blur(15px);
 }
 
-.letter h2 {
-    text-align: center;
+.letter-body {
+
+    padding:
+        28px 42px;
 }
 
-.letter .small-text {
-    text-align: center;
+.letter-body p {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 19px;
+
+    line-height: 1.65;
+
+    margin-bottom: 17px;
+
+    color: #e8dce2;
 }
 
-.letter p {
-    font-size: 17px;
 
-    line-height: 1.8;
-
-    margin-bottom: 22px;
-
-    color: rgba(255,255,255,.9);
-}
-
-
-/* =========================================
-   SCREEN 5 — QUESTION
-========================================= */
+/* =========================
+   QUESTION
+========================= */
 
 .question-card {
 
-    width: 100%;
-    max-width: 600px;
-
-    padding: 45px 30px;
-
-    border-radius: 30px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.4);
-
-    backdrop-filter: blur(15px);
+    padding:
+        40px 25px;
 }
 
 .question-heart {
 
-    font-size: 65px;
+    color: #e5a3c1;
 
-    margin-bottom: 20px;
+    font-size: 55px;
+
+    margin-bottom: 12px;
 
     animation:
-        heartBeat 1.4s infinite;
+        heartBeat 1.5s infinite;
 }
 
 .question-text {
 
-    font-size: 20px;
+    font-size: 18px;
 
-    line-height: 1.7;
-
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .question-buttons {
@@ -470,83 +492,71 @@ h2 {
 
     align-items: center;
 
-    gap: 15px;
+    gap: 14px;
 }
 
-.yes-button {
-
-    background:
-        linear-gradient(
-            135deg,
-            #a35c91,
-            #5d2d5b
-        );
+.yes-btn,
+.no-btn {
+    min-width: 110px;
 }
 
-.no-button {
+.no-btn {
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.06);
 
     position: relative;
 
-    z-index: 20;
+    z-index: 50;
 }
 
-.question-hint {
+#hint {
 
-    margin-top: 25px;
+    margin-top: 20px;
 
-    font-size: 14px;
+    font-size: 12px;
 
-    opacity: .65;
+    color: #9f929a;
 }
 
 
-/* =========================================
-   SCREEN 6 — CAKE
-========================================= */
+/* =========================
+   CAKE
+========================= */
 
-.cake-screen {
-    overflow: hidden;
-}
-
-.cake-content {
+.cake-section {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 }
 
 .cake-intro {
-
-    line-height: 1.7;
-
-    opacity: .8;
-
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
-
-
-/* =========================================
-   CAKE
-========================================= */
 
 .cake {
 
     position: relative;
 
-    width: 280px;
+    width: 310px;
+    height: 270px;
 
-    height: 250px;
+    border: 0;
+
+    background: transparent;
 
     cursor: pointer;
 
-    margin-bottom: 25px;
+    margin: 0;
+
+    filter:
+        drop-shadow(
+            0 25px 35px
+            rgba(0,0,0,.5)
+        );
 
     transition:
-        transform .3s ease;
+        transform .3s;
 }
 
 .cake:hover {
@@ -556,92 +566,77 @@ h2 {
 
 /* PLATE */
 
-.cake-plate {
+.plate {
 
     position: absolute;
 
     left: 50%;
-
     bottom: 5px;
 
     transform:
         translateX(-50%);
 
-    width: 300px;
-
+    width: 310px;
     height: 25px;
 
     border-radius: 50%;
 
     background:
         linear-gradient(
-            to bottom,
-            #e7dce5,
-            #8b7185
+            #e4d7df,
+            #75616f
         );
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.5);
 }
 
 
-/* BOTTOM LAYER */
+/* BOTTOM */
 
 .cake-bottom {
 
     position: absolute;
 
     left: 50%;
-
-    bottom: 28px;
+    bottom: 30px;
 
     transform:
         translateX(-50%);
 
-    width: 245px;
-
-    height: 75px;
+    width: 250px;
+    height: 72px;
 
     border-radius:
-        15px 15px 25px 25px;
+        14px 14px 22px 22px;
 
     background:
         linear-gradient(
-            to bottom,
-            #9b526c,
-            #633347
+            #a85c76,
+            #613448
         );
-
-    box-shadow:
-        inset 0 8px 10px rgba(255,255,255,.12);
 }
 
 
-/* MIDDLE LAYER */
+/* MIDDLE */
 
 .cake-middle {
 
     position: absolute;
 
     left: 50%;
-
-    bottom: 90px;
+    bottom: 91px;
 
     transform:
         translateX(-50%);
 
-    width: 220px;
-
-    height: 70px;
+    width: 225px;
+    height: 68px;
 
     border-radius:
-        15px 15px 20px 20px;
+        14px 14px 20px 20px;
 
     background:
         linear-gradient(
-            to bottom,
-            #d9829d,
-            #9c526d
+            #d9869e,
+            #974f69
         );
 
     display: flex;
@@ -650,13 +645,11 @@ h2 {
 
     justify-content: space-around;
 
-    padding: 0 35px;
-
-    box-shadow:
-        inset 0 7px 10px rgba(255,255,255,.12);
+    padding: 0 30px;
 }
 
 .cake-middle span {
+    color: #ffe0ea;
     font-size: 18px;
 }
 
@@ -668,93 +661,97 @@ h2 {
     position: absolute;
 
     left: 50%;
-
-    bottom: 148px;
+    bottom: 149px;
 
     transform:
         translateX(-50%);
 
-    width: 200px;
-
+    width: 205px;
     height: 58px;
 
     border-radius:
-        50% 50% 20px 20px;
+        50% 50% 18px 18px;
 
     background:
         linear-gradient(
-            to bottom,
-            #f3d7e0,
-            #d58aa0
+            #f5dfe7,
+            #d58ba1
         );
 
     box-shadow:
-        inset 0 8px 10px rgba(255,255,255,.35);
+        inset 0 8px 12px
+        rgba(255,255,255,.35);
 }
 
-
-/* CREAM */
-
-.cream {
+.cake-top i {
 
     position: absolute;
 
-    width: 28px;
+    bottom: -10px;
 
-    height: 30px;
+    width: 30px;
+    height: 29px;
+
+    background: white;
 
     border-radius:
         0 0 50% 50%;
-
-    background: #fff;
-
-    bottom: -12px;
 }
 
-.cream-one {
-    left: 30px;
+.cake-top i:nth-child(1) {
+    left: 25px;
 }
 
-.cream-two {
-    left: 85px;
+.cake-top i:nth-child(2) {
+    left: 75px;
 }
 
-.cream-three {
-    right: 30px;
+.cake-top i:nth-child(3) {
+    right: 35px;
 }
 
 
-/* =========================================
-   CANDLE
-========================================= */
+/* CANDLE */
 
 .candle {
 
     position: absolute;
 
     left: 50%;
-
-    bottom: 195px;
+    bottom: 194px;
 
     transform:
         translateX(-50%);
 
-    width: 25px;
-
+    width: 27px;
     height: 65px;
 
-    border-radius: 7px 7px 4px 4px;
+    border-radius: 7px;
 
     background:
         repeating-linear-gradient(
             135deg,
-            #f3dbe8 0,
-            #f3dbe8 7px,
-            #b76c91 7px,
-            #b76c91 13px
+            #f4dce8 0 7px,
+            #ad668b 7px 13px
         );
 
-    z-index: 5;
+    z-index: 10;
+}
+
+.wick {
+
+    position: absolute;
+
+    left: 50%;
+    top: -9px;
+
+    transform:
+        translateX(-50%);
+
+    width: 3px;
+    height: 10px;
+
+    background: #20151a;
 }
 
 
@@ -765,40 +762,36 @@ h2 {
     position: absolute;
 
     left: 50%;
-
-    top: -45px;
+    top: -52px;
 
     transform:
         translateX(-50%);
 
-    width: 24px;
+    width: 28px;
+    height: 43px;
 
-    height: 38px;
-
-    border-radius:
-        50% 50% 50% 50%;
+    border-radius: 50%;
 
     background:
         radial-gradient(
-            circle at 50% 70%,
-            #fff 0 15%,
-            #ffd65a 30%,
-            #ff9c32 60%,
-            #f04d35 100%
+            circle at 50% 72%,
+            white 0 14%,
+            #ffe16c 28%,
+            #ff9e34 58%,
+            #ed4d3a 100%
         );
 
     box-shadow:
-        0 0 15px #ffb84d,
-        0 0 35px #ff8738;
-
-    transform-origin:
-        center bottom;
+        0 0 18px #ffc05b,
+        0 0 40px
+        rgba(255,120,50,.7);
 
     animation:
-        flameDance .7s infinite alternate;
+        flameMove .6s
+        infinite alternate;
 }
 
-@keyframes flameDance {
+@keyframes flameMove {
 
     from {
         transform:
@@ -810,43 +803,10 @@ h2 {
     to {
         transform:
             translateX(-50%)
-            scale(1.1)
+            scale(1.12)
             rotate(3deg);
     }
 }
-
-
-/* CANDLE GLOW */
-
-.candle-glow {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: -60px;
-
-    transform:
-        translateX(-50%);
-
-    width: 90px;
-
-    height: 90px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,180,60,.18),
-            transparent 70%
-        );
-
-    pointer-events: none;
-}
-
-
-/* BLOWN FLAME */
 
 .flame.blown {
 
@@ -856,121 +816,81 @@ h2 {
 
     transform:
         translateX(-50%)
-        scale(0);
+        scale(.05);
 }
 
 
-/* =========================================
-   CANDLE TEXT
-========================================= */
+/* CAKE TEXT */
 
 .candle-text {
 
-    font-size: 17px;
+    min-height: 28px;
 
-    min-height: 25px;
+    margin-top: 4px;
 
-    margin-bottom: 20px;
-
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
-}
-
-.final-cake-button {
-    display: none;
+    margin-bottom: 10px;
 }
 
 
-/* =========================================
-   SCREEN 7 — FINAL
-========================================= */
-
-.final-screen {
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(130,55,120,.2),
-            transparent 60%
-        );
-}
+/* =========================
+   FINAL
+========================= */
 
 .final-heart {
 
-    font-size: 90px;
+    color: #e5a3c1;
 
-    margin-bottom: 25px;
+    font-size: 85px;
 
-    animation:
-        heartBeat 1.3s infinite;
+    margin-bottom: 22px;
 
     filter:
         drop-shadow(
-            0 0 20px
-            rgba(255,100,150,.5)
+            0 0 25px
+            rgba(229,163,193,.45)
         );
+
+    animation:
+        heartBeat 1.5s infinite;
 }
 
 .final-message {
 
-    max-width: 600px;
+    margin-top: 30px;
 
-    font-size: 20px;
+    font-size: 18px;
+}
 
-    line-height: 1.7;
-
-    margin-top: 10px;
+.final-message strong {
+    color: white;
 }
 
 .forever {
-
-    max-width: 550px;
-
-    margin-top: 25px;
-
-    font-size: 17px;
-
-    opacity: .75;
-
-    line-height: 1.7;
+    margin-top: 22px;
 }
 
-.final-sparkles {
+.sparkles {
 
-    margin-top: 35px;
+    margin-top: 30px;
 
-    font-size: 28px;
+    color: #e5a3c1;
 
-    letter-spacing: 10px;
-
-    animation:
-        sparkle 2s infinite;
-}
-
-@keyframes sparkle {
-
-    0%,
-    100% {
-        opacity: .5;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    font-size: 20px;
 }
 
 
-/* =========================================
-   MUSIC BUTTON
-========================================= */
+/* =========================
+   MUSIC
+========================= */
 
-.music-button {
+.music-btn {
 
     position: fixed;
 
-    top: 20px;
-    right: 20px;
+    top: 18px;
+    right: 18px;
+
+    z-index: 500;
 
     width: 50px;
     height: 50px;
@@ -979,35 +899,26 @@ h2 {
 
     border:
         1px solid
-        rgba(255,255,255,.2);
+        rgba(255,255,255,.18);
 
     background:
         rgba(255,255,255,.08);
 
     color: white;
 
-    font-size: 20px;
+    font-size: 21px;
 
     cursor: pointer;
 
-    z-index: 10000;
-
-    backdrop-filter: blur(10px);
-
-    transition:
-        transform .25s ease;
-}
-
-.music-button:hover {
-    transform: scale(1.1);
+    backdrop-filter: blur(12px);
 }
 
 
-/* =========================================
-   CONFETTI
-========================================= */
+/* =========================
+   EFFECTS
+========================= */
 
-#confetti-container {
+#effects {
 
     position: fixed;
 
@@ -1015,52 +926,39 @@ h2 {
 
     pointer-events: none;
 
-    overflow: hidden;
+    z-index: 1000;
 
-    z-index: 9999;
+    overflow: hidden;
 }
 
 .confetti {
 
-    position: absolute;
+    position: fixed;
 
-    top: -30px;
+    top: -20px;
 
-    width: 9px;
-    height: 15px;
+    width: 8px;
+    height: 14px;
 
     background: white;
 
-    border-radius: 2px;
-
     animation:
-        confettiFall 3.5s linear forwards;
+        confettiFall 3.5s
+        linear forwards;
 }
 
 @keyframes confettiFall {
 
-    0% {
-        transform:
-            translateY(0)
-            rotate(0deg);
+    to {
 
-        opacity: 1;
-    }
-
-    100% {
         transform:
-            translateY(115vh)
-            translateX(100px)
+            translateY(110vh)
+            translateX(var(--x))
             rotate(720deg);
 
         opacity: 0;
     }
 }
-
-
-/* =========================================
-   HEART CELEBRATION
-========================================= */
 
 .floating-heart {
 
@@ -1068,50 +966,44 @@ h2 {
 
     bottom: -30px;
 
-    pointer-events: none;
-
-    z-index: 10000;
+    color: #eaa6c6;
 
     font-size: 25px;
 
     animation:
-        heartFloat 3.5s ease-out forwards;
+        heartFloat 4s
+        ease-out forwards;
 }
 
 @keyframes heartFloat {
 
-    0% {
-        opacity: 0;
-        transform:
-            translateY(0)
-            scale(.5);
-    }
+    to {
 
-    15% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
         transform:
-            translateY(-110vh)
-            translateX(var(--heart-x))
-            scale(1.2)
-            rotate(20deg);
+            translate(
+                var(--x),
+                -110vh
+            )
+            scale(1.2);
+
+        opacity: 0;
     }
 }
 
 
-/* =========================================
+/* =========================
    MOBILE
-========================================= */
+========================= */
 
 @media (max-width: 700px) {
 
     .screen {
-        padding:
-            80px 18px
-            40px;
+        padding: 25px 16px;
+    }
+
+    .heart {
+        font-size: 48px;
+        margin-bottom: 12px;
     }
 
     h1 {
@@ -1119,76 +1011,68 @@ h2 {
     }
 
     h2 {
-        font-size: 36px;
+        font-size: 38px;
     }
 
-    .photo-grid {
+    .name {
+        margin: 16px 0 22px;
+    }
+
+    .photos {
         grid-template-columns: 1fr;
-
-        max-width: 360px;
+        max-width: 390px;
     }
 
-    .photo-card img {
-        height: 320px;
+    .photo img {
+        height: 310px;
     }
 
-    .letter {
-        padding: 28px 22px;
+    .letter-body {
+        padding: 25px 21px;
     }
 
-    .letter p {
-        font-size: 16px;
-    }
-
-    .question-card {
-        padding: 35px 20px;
-    }
-
-    .question-buttons {
-        gap: 10px;
+    .letter-body p {
+        font-size: 18px;
     }
 
     .cake {
-        transform: scale(.9);
+        transform: scale(.82);
+        margin-top: -20px;
+        margin-bottom: -25px;
     }
 
     .cake:hover {
-        transform: scale(.93);
-    }
-
-    .final-heart {
-        font-size: 75px;
-    }
-
-    .final-message {
-        font-size: 18px;
+        transform: scale(.84);
     }
 }
 
 
-/* =========================================
-   VERY SMALL PHONES
-========================================= */
+/* =========================
+   SMALL PHONES
+========================= */
 
 @media (max-width: 380px) {
 
+    h1 {
+        font-size: 37px;
+    }
+
+    h2 {
+        font-size: 34px;
+    }
+
+    .heart {
+        font-size: 42px;
+    }
+
+    .name {
+        font-size: 25px;
+        margin: 12px 0 18px;
+    }
+
     .cake {
-        transform: scale(.78);
-        margin-top: -15px;
-        margin-bottom: -10px;
-    }
-
-    .cake:hover {
-        transform: scale(.8);
-    }
-
-    .photo-card img {
-        height: 280px;
-    }
-
-    .main-button {
-        font-size: 14px;
-        padding: 13px 22px;
+        transform: scale(.70);
+        margin-top: -35px;
+        margin-bottom: -45px;
     }
 }
-```
