@@ -1,613 +1,554 @@
-```javascript
-/* =========================================
-   MUSIC
-========================================= */
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
 
-const music =
-    document.getElementById("backgroundMusic");
+const effects = document.getElementById("effects");
 
-const musicButton =
-    document.getElementById("musicButton");
-
-let musicStarted = false;
+let currentScreen = 1;
+let candlesBlown = false;
 
 
-/* Start music */
-
-function startMusic() {
-
-    if (!music) {
-        console.log("Music element not found.");
-        return;
-    }
-
-    music.volume = 0.7;
-
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-
-        playPromise
-            .then(() => {
-
-                musicStarted = true;
-
-                if (musicButton) {
-                    musicButton.innerHTML = "🔊";
-                }
-
-            })
-            .catch(error => {
-
-                console.log(
-                    "Music could not start:",
-                    error
-                );
-
-            });
-    }
-}
-
-
-/* Music button */
-
-function toggleMusic() {
-
-    if (!music) return;
-
-
-    if (music.paused) {
-
-        music.play()
-            .then(() => {
-
-                if (musicButton) {
-                    musicButton.innerHTML = "🔊";
-                }
-
-            })
-            .catch(error => {
-
-                console.log(
-                    "Music error:",
-                    error
-                );
-
-            });
-
-    } else {
-
-        music.pause();
-
-        if (musicButton) {
-            musicButton.innerHTML = "🎵";
-        }
-    }
-}
-
-
-/* =========================================
-   SCREEN NAVIGATION
-========================================= */
+/* =================================
+   SHOW SCREEN
+================================= */
 
 function showScreen(number) {
 
-    const screens =
-        document.querySelectorAll(".screen");
-
-
-    screens.forEach(screen => {
-
-        screen.classList.remove("active");
-
-    });
-
-
-    const nextScreen =
+    const next =
         document.getElementById(
             "screen" + number
         );
 
+    if (!next) {
+        console.log("Screen not found:", number);
+        return;
+    }
 
-    if (nextScreen) {
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
 
-        nextScreen.classList.add("active");
+            screen.classList.remove("active");
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
         });
 
-    } else {
+    next.classList.add("active");
+
+    currentScreen = number;
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =================================
+   MUSIC
+================================= */
+
+async function playMusic() {
+
+    try {
+
+        await music.play();
+
+        musicBtn.textContent = "🔊";
+
+    } catch (error) {
 
         console.log(
-            "Screen not found:",
-            number
+            "Music could not start.",
+            error
         );
 
     }
 }
 
 
-/* =========================================
-   OPEN SURPRISE
-========================================= */
+musicBtn.addEventListener(
+    "click",
+    async function () {
 
-function startSurprise() {
+        if (music.paused) {
 
-    /*
-       The music starts here because
-       this function is triggered by
-       the user's button click.
-    */
+            await playMusic();
 
-    startMusic();
+        } else {
 
-    showScreen(2);
+            music.pause();
 
-    createConfetti();
-
-    createHearts();
-}
-
-
-/* =========================================
-   YES BUTTON
-========================================= */
-
-function answerYes() {
-
-    createConfetti();
-
-    createHearts();
-
-    const hint =
-        document.getElementById("questionHint");
-
-    if (hint) {
-
-        hint.innerHTML =
-            "I knew you'd say YES ❤️🥺";
-
-    }
-
-
-    setTimeout(() => {
-
-        showScreen(6);
-
-    }, 1200);
-}
-
-
-/* =========================================
-   NO BUTTON
-========================================= */
-
-const noButton =
-    document.getElementById("noButton");
-
-
-if (noButton) {
-
-    noButton.addEventListener(
-        "click",
-        function () {
-
-            const buttonWidth =
-                noButton.offsetWidth;
-
-            const buttonHeight =
-                noButton.offsetHeight;
-
-
-            const maxX =
-                window.innerWidth -
-                buttonWidth -
-                20;
-
-            const maxY =
-                window.innerHeight -
-                buttonHeight -
-                20;
-
-
-            const randomX =
-                Math.max(
-                    10,
-                    Math.random() * maxX
-                );
-
-            const randomY =
-                Math.max(
-                    10,
-                    Math.random() * maxY
-                );
-
-
-            noButton.style.position =
-                "fixed";
-
-            noButton.style.left =
-                randomX + "px";
-
-            noButton.style.top =
-                randomY + "px";
-
-
-            const hint =
-                document.getElementById(
-                    "questionHint"
-                );
-
-
-            if (hint) {
-
-                hint.innerHTML =
-                    "Hehe 😏 You can't escape the YES ❤️";
-
-            }
-
-        }
-    );
-}
-
-
-/* =========================================
-   CAKE
-========================================= */
-
-let candlesBlown = false;
-
-
-function blowCandles() {
-
-    /*
-       Prevent the cake from triggering
-       repeatedly.
-    */
-
-    if (candlesBlown) return;
-
-    candlesBlown = true;
-
-
-    const flame =
-        document.getElementById("flame");
-
-    const candleText =
-        document.getElementById(
-            "candleText"
-        );
-
-    const finalButton =
-        document.getElementById(
-            "finalButton"
-        );
-
-
-    /* Blow out flame */
-
-    if (flame) {
-
-        flame.classList.add("blown");
-
-    }
-
-
-    /* Change text */
-
-    if (candleText) {
-
-        candleText.innerHTML =
-            "✨ Wish made... ❤️";
-
-        candleText.style.transform =
-            "scale(1.1)";
-
-    }
-
-
-    /*
-       BIG CELEBRATION
-    */
-
-    createConfetti(100);
-
-    createHearts(30);
-
-
-    /* Second wave */
-
-    setTimeout(() => {
-
-        createConfetti(80);
-
-        createHearts(20);
-
-    }, 500);
-
-
-    /* Third wave */
-
-    setTimeout(() => {
-
-        createConfetti(60);
-
-        createHearts(15);
-
-    }, 1100);
-
-
-    /*
-       Show final button
-    */
-
-    setTimeout(() => {
-
-        if (finalButton) {
-
-            finalButton.style.display =
-                "inline-block";
-
-        }
-
-    }, 1300);
-}
-
-
-/* =========================================
-   CONFETTI
-========================================= */
-
-function createConfetti(amount = 50) {
-
-    const container =
-        document.getElementById(
-            "confetti-container"
-        );
-
-
-    if (!container) return;
-
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        const confetti =
-            document.createElement("div");
-
-
-        confetti.className =
-            "confetti";
-
-
-        /*
-           Random horizontal position
-        */
-
-        confetti.style.left =
-            Math.random() * 100 + "%";
-
-
-        /*
-           Random size
-        */
-
-        const size =
-            Math.random() * 8 + 5;
-
-        confetti.style.width =
-            size + "px";
-
-        confetti.style.height =
-            size * 1.6 + "px";
-
-
-        /*
-           Random animation duration
-        */
-
-        confetti.style.animationDuration =
-            Math.random() * 2 + 2.5 + "s";
-
-
-        /*
-           Random delay
-        */
-
-        confetti.style.animationDelay =
-            Math.random() * .8 + "s";
-
-
-        /*
-           Different shapes
-        */
-
-        if (Math.random() > .7) {
-
-            confetti.style.borderRadius =
-                "50%";
-
-        }
-
-
-        container.appendChild(confetti);
-
-
-        /*
-           Remove after animation
-        */
-
-        setTimeout(() => {
-
-            confetti.remove();
-
-        }, 5000);
-
-    }
-}
-
-
-/* =========================================
-   FLOATING HEARTS
-========================================= */
-
-function createHearts(amount = 12) {
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        setTimeout(() => {
-
-            const heart =
-                document.createElement("div");
-
-
-            heart.className =
-                "floating-heart";
-
-
-            const hearts = [
-                "❤️",
-                "💗",
-                "💖",
-                "💕",
-                "💓",
-                "💘"
-            ];
-
-
-            heart.innerHTML =
-                hearts[
-                    Math.floor(
-                        Math.random() *
-                        hearts.length
-                    )
-                ];
-
-
-            /*
-               Random starting position
-            */
-
-            heart.style.left =
-                Math.random() * 100 + "%";
-
-
-            /*
-               Random size
-            */
-
-            heart.style.fontSize =
-                Math.random() * 20 + 18 + "px";
-
-
-            /*
-               Random sideways movement
-            */
-
-            const movement =
-                (Math.random() * 200) - 100;
-
-
-            heart.style.setProperty(
-                "--heart-x",
-                movement + "px"
-            );
-
-
-            /*
-               Random speed
-            */
-
-            heart.style.animationDuration =
-                Math.random() * 1.5 + 3 + "s";
-
-
-            document.body.appendChild(
-                heart
-            );
-
-
-            setTimeout(() => {
-
-                heart.remove();
-
-            }, 5000);
-
-        }, i * 80);
-
-    }
-}
-
-
-/* =========================================
-   PAGE LOAD
-========================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const screens =
-            document.querySelectorAll(
-                ".screen"
-            );
-
-
-        /*
-           Make sure Screen 1 is
-           the first screen.
-        */
-
-        screens.forEach(
-            (screen, index) => {
-
-                if (index === 0) {
-
-                    screen.classList.add(
-                        "active"
-                    );
-
-                } else {
-
-                    screen.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /*
-           Check whether song exists
-           in the expected location.
-        */
-
-        if (music) {
-
-            music.addEventListener(
-                "error",
-                function () {
-
-                    console.log(
-                        "⚠️ song.mpeg could not be loaded. Check the filename and location."
-                    );
-
-                }
-            );
+            musicBtn.textContent = "♪";
 
         }
 
     }
 );
-```
+
+
+/* =================================
+   OPEN SURPRISE
+================================= */
+
+document
+    .getElementById("startBtn")
+    .addEventListener(
+        "click",
+        function () {
+
+            /*
+             IMPORTANT:
+             Music is attempted,
+             but the page continues
+             even if the music fails.
+            */
+
+            playMusic();
+
+            createConfetti(30);
+
+            createHearts(10);
+
+            showScreen(2);
+
+        }
+    );
+
+
+/* =================================
+   NORMAL NEXT BUTTONS
+================================= */
+
+document
+    .querySelectorAll(".next-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const number =
+                    Number(
+                        this.dataset.screen
+                    );
+
+                showScreen(number);
+
+            }
+        );
+
+    });
+
+
+/* =================================
+   YES BUTTON
+================================= */
+
+document
+    .getElementById("yesBtn")
+    .addEventListener(
+        "click",
+        function () {
+
+            document.getElementById(
+                "hint"
+            ).textContent =
+                "I knew you'd say YES ❤️🥺";
+
+            createConfetti(70);
+
+            createHearts(25);
+
+            setTimeout(
+                function () {
+
+                    showScreen(6);
+
+                },
+                1000
+            );
+
+        }
+    );
+
+
+/* =================================
+   NO BUTTON
+================================= */
+
+const noBtn =
+    document.getElementById("noBtn");
+
+const hint =
+    document.getElementById("hint");
+
+let noCount = 0;
+
+
+function moveNoButton() {
+
+    noCount++;
+
+    const buttonWidth =
+        noBtn.offsetWidth;
+
+    const buttonHeight =
+        noBtn.offsetHeight;
+
+    const maxX =
+        window.innerWidth -
+        buttonWidth -
+        15;
+
+    const maxY =
+        window.innerHeight -
+        buttonHeight -
+        15;
+
+    const x =
+        Math.random() *
+        Math.max(maxX, 20);
+
+    const y =
+        70 +
+        Math.random() *
+        Math.max(
+            maxY - 70,
+            20
+        );
+
+    noBtn.style.position = "fixed";
+
+    noBtn.style.left =
+        x + "px";
+
+    noBtn.style.top =
+        y + "px";
+
+
+    if (noCount === 1) {
+
+        hint.textContent =
+            "Hehe... try again 😏";
+
+    } else if (noCount === 2) {
+
+        hint.textContent =
+            "You can't escape the YES ❤️";
+
+    } else {
+
+        hint.textContent =
+            "Just press YES 😌❤️";
+
+    }
+
+}
+
+
+/* Desktop */
+
+noBtn.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+/* Click */
+
+noBtn.addEventListener(
+    "click",
+    moveNoButton
+);
+
+
+/* Mobile */
+
+noBtn.addEventListener(
+    "touchstart",
+    function (event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =================================
+   CAKE
+================================= */
+
+const cake =
+    document.getElementById("cake");
+
+const flame =
+    document.getElementById("flame");
+
+const candleText =
+    document.getElementById(
+        "candleText"
+    );
+
+const continueBtn =
+    document.getElementById(
+        "continueBtn"
+    );
+
+
+cake.addEventListener(
+    "click",
+    blowCandles
+);
+
+
+function blowCandles() {
+
+    if (candlesBlown) {
+        return;
+    }
+
+    candlesBlown = true;
+
+
+    /* Blow out flame */
+
+    flame.classList.add("blown");
+
+
+    /* Change text */
+
+    candleText.textContent =
+        "✨ Wish made... ❤️";
+
+
+    /* Big celebration */
+
+    createConfetti(150);
+
+    createHearts(50);
+
+
+    setTimeout(
+        function () {
+
+            createConfetti(100);
+            createHearts(30);
+
+        },
+        500
+    );
+
+
+    setTimeout(
+        function () {
+
+            createConfetti(80);
+            createHearts(20);
+
+        },
+        1000
+    );
+
+
+    /* Show continue */
+
+    setTimeout(
+        function () {
+
+            continueBtn.classList.remove(
+                "hidden"
+            );
+
+        },
+        1200
+    );
+
+}
+
+
+/* =================================
+   CONTINUE
+================================= */
+
+continueBtn.addEventListener(
+    "click",
+    function () {
+
+        showScreen(7);
+
+        createHearts(30);
+
+        createConfetti(70);
+
+    }
+);
+
+
+/* =================================
+   CONFETTI
+================================= */
+
+function createConfetti(amount) {
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+        piece.className =
+            "confetti";
+
+
+        piece.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        piece.style.setProperty(
+            "--x",
+            (
+                Math.random() * 260 -
+                130
+            ) + "px"
+        );
+
+
+        piece.style.animationDelay =
+            Math.random() * .7 +
+            "s";
+
+
+        piece.style.animationDuration =
+            2.5 +
+            Math.random() * 2 +
+            "s";
+
+
+        piece.style.width =
+            5 +
+            Math.random() * 8 +
+            "px";
+
+
+        piece.style.height =
+            8 +
+            Math.random() * 12 +
+            "px";
+
+
+        effects.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            function () {
+
+                piece.remove();
+
+            },
+            5000
+        );
+
+    }
+
+}
+
+
+/* =================================
+   HEARTS
+================================= */
+
+function createHearts(amount) {
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            function () {
+
+                const heart =
+                    document.createElement(
+                        "div"
+                    );
+
+                heart.className =
+                    "floating-heart";
+
+                heart.textContent =
+                    Math.random() > .5
+                        ? "♥"
+                        : "♡";
+
+
+                heart.style.left =
+                    Math.random() * 100 +
+                    "vw";
+
+
+                heart.style.setProperty(
+                    "--x",
+                    (
+                        Math.random() * 220 -
+                        110
+                    ) + "px"
+                );
+
+
+                heart.style.fontSize =
+                    18 +
+                    Math.random() * 20 +
+                    "px";
+
+
+                effects.appendChild(
+                    heart
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        heart.remove();
+
+                    },
+                    5000
+                );
+
+            },
+            i * 50
+        );
+
+    }
+
+}
+
+
+/* =================================
+   SONG ERROR
+================================= */
+
+music.addEventListener(
+    "error",
+    function () {
+
+        console.log(
+            "❌ song.mpeg was not found."
+        );
+
+        console.log(
+            "Put song.mpeg in the same folder as index.html."
+        );
+
+    }
+);
