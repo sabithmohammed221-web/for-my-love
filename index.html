@@ -19,22 +19,17 @@
 
 </head>
 
-
 <body>
 
 
-<!-- ==============================
-     BACKGROUND
-============================== -->
+<!-- BACKGROUND -->
 
 <div class="stars"></div>
 
 <div id="confetti-container"></div>
 
 
-<!-- ==============================
-     PREMIUM BALLOONS
-============================== -->
+<!-- PREMIUM BALLOONS -->
 
 <div class="balloons">
 
@@ -66,9 +61,33 @@
 </div>
 
 
-<!-- ==============================
-     SCREEN 1 — OPENING
-============================== -->
+<!-- MUSIC -->
+
+<audio
+    id="backgroundMusic"
+    loop
+    preload="auto"
+>
+    <source
+        src="song.mpeg"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<!-- MUSIC CONTROL -->
+
+<button
+    id="musicButton"
+    class="music-button"
+    onclick="toggleMusic()"
+    aria-label="Play or pause music"
+>
+    🎵
+</button>
+
+
+<!-- SCREEN 1 -->
 
 <section
     class="screen opening active"
@@ -89,16 +108,14 @@
         Haifa
     </p>
 
-    <button onclick="showScreen()">
+    <button onclick="startSurprise()">
         Open Your Surprise ❤️
     </button>
 
 </section>
 
 
-<!-- ==============================
-     SCREEN 2 — BIRTHDAY
-============================== -->
+<!-- SCREEN 2 -->
 
 <section
     class="screen second-screen"
@@ -115,13 +132,17 @@
 
     <p class="message">
 
-        Today is a little more special
-        because it's the day you were born. ❤️
+        Today isn't just another day...
 
         <br><br>
 
-        And I'm lucky to have you
-        in my life.
+        It's the day a beautiful soul
+        came into this world.
+
+        <br><br>
+
+        And somehow, I was lucky enough
+        to have you become a part of mine. ❤️
 
     </p>
 
@@ -132,9 +153,7 @@
 </section>
 
 
-<!-- ==============================
-     SCREEN 3 — MEMORIES
-============================== -->
+<!-- SCREEN 3 -->
 
 <section
     class="screen memory-screen"
@@ -213,9 +232,7 @@
 </section>
 
 
-<!-- ==============================
-     SCREEN 4 — LOVE LETTER
-============================== -->
+<!-- SCREEN 4 -->
 
 <section
     class="screen letter-screen"
@@ -237,29 +254,34 @@
         </p>
 
         <p>
-            You are one of the most beautiful
-            parts of my life. ❤️
+            I don't always know the perfect
+            words to explain what you mean to me.
         </p>
 
         <p>
-            With you, even ordinary moments
-            feel special.
+            But I hope you always know
+            how special you are to me.
         </p>
 
         <p>
-            I may not always say it,
-            but I cherish you more than words
-            can explain.
+            You have brought so many beautiful
+            moments into my life, and I am grateful
+            for every single one of them. ❤️
         </p>
 
         <p>
             I don't need a perfect life.
-            I just need you beside me. ❤️
+
+            <br>
+
+            I just want a life where I get to see
+            you smile, hear your voice and make
+            beautiful memories with you.
         </p>
 
         <p>
-            On your birthday, remember one thing:
-            you are deeply loved.
+            On your birthday, I just want you
+            to know that you are deeply loved.
         </p>
 
     </div>
@@ -272,9 +294,7 @@
 </section>
 
 
-<!-- ==============================
-     SCREEN 5 — LOVE QUESTION
-============================== -->
+<!-- SCREEN 5 -->
 
 <section
     class="screen question-screen"
@@ -331,7 +351,7 @@
             class="question-hint"
             id="questionHint"
         >
-            Choose carefully, Baby 😌❤️
+            Choose carefully 😌❤️
         </p>
 
     </div>
@@ -339,64 +359,69 @@
 </section>
 
 
-<!-- ==============================
-     SCREEN 6 — CAKE
-============================== -->
+<!-- SCREEN 6 -->
 
 <section
     class="screen cake-screen"
     id="screen6"
 >
 
-    <p class="small-text">
-        Make A Wish, Baby… ✨
-    </p>
+    <div class="cake-content">
 
-    <h2>
-        Your Special Day ❤️
-    </h2>
+        <p class="small-text">
+            Make A Wish... ✨
+        </p>
+
+        <h2>
+            Your Special Day ❤️
+        </h2>
 
 
-    <div class="cake">
+        <!-- CAKE -->
 
         <div
-            class="candle"
-            id="candle1"
+            class="cake"
+            id="cake"
             onclick="blowCandles()"
         >
 
-            <div class="flame"></div>
+            <div
+                class="candle"
+                id="candle1"
+            >
+
+                <div class="flame"></div>
+
+            </div>
+
+
+            <div class="cake-top"></div>
+
+            <div class="cake-middle"></div>
+
+            <div class="cake-bottom"></div>
 
         </div>
 
 
-        <div class="cake-top"></div>
+        <p id="candleText">
+            Tap the flame ❤️
+        </p>
 
-        <div class="cake-middle"></div>
 
-        <div class="cake-bottom"></div>
+        <button
+            id="finalButton"
+            onclick="showScreen(7)"
+        >
+            Continue ❤️
+        </button>
 
     </div>
-
-
-    <p id="candleText">
-        Tap the flame ❤️
-    </p>
-
-
-    <button
-        id="finalButton"
-        onclick="showScreen(7)"
-    >
-        Continue ❤️
-    </button>
 
 </section>
 
 
-<!-- ==============================
-     SCREEN 7 — FINAL
-============================== -->
+<!-- SCREEN 7 -->
 
 <section
     class="screen final-screen"
@@ -419,43 +444,25 @@
 
     <p class="final-message">
 
-        If I had to choose you
-        all over again,
+        If I had to choose you all over again,
 
         <br>
 
-        I would choose you
-        every single time. ❤️
+        I would choose you every single time.
 
     </p>
 
     <p class="forever">
 
-        You will always have
-        a special place in my heart.
+        You will always have a special place
+        in my heart. ❤️
 
     </p>
 
 </section>
 
 
-<!-- ==============================
-     SONG
-============================== -->
-
-<audio
-    id="birthdaySong"
-    src="./song.mpeg"
-    preload="auto"
-    loop
-></audio>
-
-<!-- ==============================
-     JAVASCRIPT
-============================== -->
-
 <script src="script.js"></script>
-
 
 </body>
 
