@@ -1,88 +1,19 @@
 let currentScreen = 1;
+
 let cakeCelebrated = false;
 
-
-/* ==============================
-   MUSIC
-============================== */
-
-const birthdaySong = document.getElementById("birthdaySong");
+let musicStarted = false;
 
 
-function startSong() {
+/* =================================
+   ELEMENTS
+================================= */
 
-    if (!birthdaySong) {
-        console.log("Song element not found");
-        return;
-    }
+const music =
+    document.getElementById("backgroundMusic");
 
-    birthdaySong.volume = 0.7;
-
-    const playPromise = birthdaySong.play();
-
-    if (playPromise !== undefined) {
-
-        playPromise
-            .then(() => {
-                console.log("🎵 Song started successfully");
-            })
-            .catch((error) => {
-                console.log("🎵 Song error:", error);
-            });
-
-    }
-}
-
-
-/* ==============================
-   OPEN SURPRISE
-============================== */
-
-function startSurprise() {
-
-    // Start music from the user's button tap
-    startSong();
-
-    // Open birthday screen
-    showScreen(2);
-
-}
-
-
-/* ==============================
-   SCREEN CHANGE
-============================== */
-
-function showScreen(number) {
-
-    const oldScreen =
-        document.getElementById("screen" + currentScreen);
-
-    const newScreen =
-        document.getElementById("screen" + number);
-
-    if (!newScreen) {
-        return;
-    }
-
-    if (oldScreen) {
-        oldScreen.classList.remove("active");
-    }
-
-    setTimeout(() => {
-
-        newScreen.classList.add("active");
-
-        currentScreen = number;
-
-    }, 300);
-
-}
-
-
-/* ==============================
-   NO BUTTON
-============================== */
+const musicButton =
+    document.getElementById("musicButton");
 
 const noButton =
     document.getElementById("noButton");
@@ -91,36 +22,161 @@ const questionHint =
     document.getElementById("questionHint");
 
 
+/* =================================
+   START SURPRISE + MUSIC
+================================= */
+
+function startSurprise() {
+
+    /* Start the music because this function
+       is triggered by the user's tap */
+
+    if (!musicStarted) {
+
+        music.play()
+            .then(() => {
+
+                musicStarted = true;
+
+                musicButton.innerHTML = "🔊";
+
+            })
+            .catch(() => {
+
+                musicButton.innerHTML = "🎵";
+
+            });
+
+    }
+
+    showScreen(2);
+}
+
+
+/* =================================
+   MUSIC PLAY / PAUSE
+================================= */
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play()
+            .then(() => {
+
+                musicStarted = true;
+
+                musicButton.innerHTML = "🔊";
+
+            })
+            .catch(() => {
+
+                musicButton.innerHTML = "🎵";
+
+            });
+
+    } else {
+
+        music.pause();
+
+        musicButton.innerHTML = "🔇";
+
+    }
+}
+
+
+/* =================================
+   CHANGE SCREEN
+================================= */
+
+function showScreen(number) {
+
+    const oldScreen =
+        document.getElementById(
+            "screen" + currentScreen
+        );
+
+    const newScreen =
+        document.getElementById(
+            "screen" + number
+        );
+
+
+    if (!newScreen) {
+        return;
+    }
+
+
+    if (oldScreen) {
+
+        oldScreen.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    setTimeout(() => {
+
+        newScreen.classList.add(
+            "active"
+        );
+
+        currentScreen =
+            number;
+
+    }, 300);
+}
+
+
+/* =================================
+   LOVE QUESTION
+================================= */
+
 function moveNoButton() {
 
-    if (!noButton) {
-        return;
-    }
-
     const card =
-        document.querySelector(".question-card");
+        document.querySelector(
+            ".question-card"
+        );
 
-    if (!card) {
+
+    if (!card || !noButton) {
         return;
     }
+
 
     const cardRect =
         card.getBoundingClientRect();
 
+
     const maxX =
-        Math.max(80, cardRect.width / 2 - 80);
+        Math.max(
+            80,
+            cardRect.width / 2 - 80
+        );
+
 
     const maxY =
-        Math.max(60, cardRect.height / 2 - 80);
+        Math.max(
+            60,
+            cardRect.height / 2 - 80
+        );
+
 
     const randomX =
-        (Math.random() * 2 - 1) * maxX;
+        (Math.random() * 2 - 1)
+        * maxX;
+
 
     const randomY =
-        (Math.random() * 2 - 1) * maxY;
+        (Math.random() * 2 - 1)
+        * maxY;
+
 
     noButton.style.transform =
         `translate(${randomX}px, ${randomY}px)`;
+
 
     if (questionHint) {
 
@@ -128,72 +184,70 @@ function moveNoButton() {
             "Hmm… I don't think that button wants to be pressed 😏❤️";
 
     }
-
 }
 
 
-if (noButton) {
-
-    noButton.addEventListener(
-        "mouseenter",
-        moveNoButton
-    );
-
-    noButton.addEventListener(
-        "touchstart",
-        function(event) {
-
-            event.preventDefault();
-
-            moveNoButton();
-
-        },
-        {
-            passive: false
-        }
-    );
-
-    noButton.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            moveNoButton();
-
-        }
-    );
-
-}
+noButton.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
 
 
-/* ==============================
-   YES BUTTON
-============================== */
+noButton.addEventListener(
+    "touchstart",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+noButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* =================================
+   YES ANSWER
+================================= */
 
 function answerYes() {
 
     if (questionHint) {
 
         questionHint.innerHTML =
-            "I knew you'd say YES, Baby. ❤️";
+            "I knew you'd say YES. ❤️";
 
     }
 
+
     createConfetti();
+
 
     setTimeout(() => {
 
         showScreen(6);
 
     }, 1500);
-
 }
 
 
-/* ==============================
-   CAKE
-============================== */
+/* =================================
+   CAKE CELEBRATION
+================================= */
 
 function blowCandles() {
 
@@ -201,56 +255,67 @@ function blowCandles() {
         return;
     }
 
+
     cakeCelebrated = true;
 
+
     const candle =
-        document.getElementById("candle1");
+        document.getElementById(
+            "candle1"
+        );
+
 
     const text =
-        document.getElementById("candleText");
+        document.getElementById(
+            "candleText"
+        );
+
 
     const finalButton =
-        document.getElementById("finalButton");
+        document.getElementById(
+            "finalButton"
+        );
 
-    if (candle) {
 
-        candle.classList.add("off");
+    /* Turn flame off */
 
-    }
+    candle.classList.add(
+        "off"
+    );
 
-    if (text) {
 
-        text.innerHTML =
-            "Happy Birthday, Haifa! 🎉❤️";
+    /* Birthday message */
 
-    }
+    text.innerHTML =
+        "Happy Birthday, Haifa! 🎉❤️";
+
+
+    /* Celebration */
 
     createConfetti();
+
     createConfetti();
+
+
+    /* Show Continue after celebration */
 
     setTimeout(() => {
 
-        if (finalButton) {
+        finalButton.classList.add(
+            "show"
+        );
 
-            finalButton.classList.add("show");
 
-        }
-
-        if (text) {
-
-            text.innerHTML =
-                "Your wish is made, Baby. ✨❤️";
-
-        }
+        text.innerHTML =
+            "Your wish is made. ✨❤️";
 
     }, 2500);
-
 }
 
 
-/* ==============================
+/* =================================
    CONFETTI
-============================== */
+================================= */
 
 function createConfetti() {
 
@@ -259,9 +324,6 @@ function createConfetti() {
             "confetti-container"
         );
 
-    if (!container) {
-        return;
-    }
 
     const symbols = [
         "❤️",
@@ -272,32 +334,65 @@ function createConfetti() {
         "⭐"
     ];
 
-    for (let i = 0; i < 100; i++) {
+
+    for (
+        let i = 0;
+        i < 100;
+        i++
+    ) {
 
         const piece =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         piece.className =
             "confetti";
 
+
         piece.innerText =
             symbols[
                 Math.floor(
-                    Math.random() *
+                    Math.random()
+                    *
                     symbols.length
                 )
             ];
 
+
         piece.style.left =
-            Math.random() * 100 + "vw";
+            Math.random()
+            *
+            100
+            +
+            "vw";
+
 
         piece.style.fontSize =
-            (12 + Math.random() * 18) + "px";
+            (
+                12
+                +
+                Math.random()
+                *
+                18
+            )
+            +
+            "px";
+
 
         piece.style.animationDelay =
-            Math.random() * 1.5 + "s";
+            Math.random()
+            *
+            1.5
+            +
+            "s";
 
-        container.appendChild(piece);
+
+        container.appendChild(
+            piece
+        );
+
 
         setTimeout(() => {
 
@@ -306,5 +401,4 @@ function createConfetti() {
         }, 4500);
 
     }
-
 }
