@@ -1,353 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Happy Birthday Haifa ❤️</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070509">
+    <title>For Haifa ❤️</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-
-<!-- BACKGROUND -->
-
-<div class="stars"></div>
-
-<div id="confetti-container"></div>
-
-
-<!-- PREMIUM BALLOONS -->
-
-<div class="balloons">
-
-    <div class="balloon balloon1">
-        <div class="balloon-shine"></div>
-        <div class="balloon-string"></div>
-    </div>
-
-    <div class="balloon balloon2">
-        <div class="balloon-shine"></div>
-        <div class="balloon-string"></div>
-    </div>
-
-    <div class="balloon balloon3">
-        <div class="balloon-shine"></div>
-        <div class="balloon-string"></div>
-    </div>
-
-    <div class="balloon balloon4">
-        <div class="balloon-shine"></div>
-        <div class="balloon-string"></div>
-    </div>
-
-    <div class="balloon balloon5">
-        <div class="balloon-shine"></div>
-        <div class="balloon-string"></div>
-    </div>
-
+<div class="background">
+    <div class="stars"></div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 </div>
 
+<div id="effects"></div>
 
 <!-- MUSIC -->
-
-<audio
-    id="backgroundMusic"
-    loop
-    preload="auto"
->
-    <source
-        src="song.mpeg"
-        type="audio/mpeg"
-    >
+<audio id="music" loop preload="auto">
+    <source src="song.mpeg" type="audio/mpeg">
 </audio>
 
-
-<!-- MUSIC CONTROL -->
-
-<button
-    id="musicButton"
-    class="music-button"
-    onclick="toggleMusic()"
-    aria-label="Play or pause music"
->
-    🎵
-</button>
+<button id="musicBtn" class="music-btn" type="button">♪</button>
 
 
-<!-- SCREEN 1 -->
+<!-- ================= SCREEN 1 ================= -->
 
-<section
-    class="screen opening active"
-    id="screen1"
->
+<section class="screen active" id="screen1">
 
-    <p class="small-text">
-        Hey Baby… ❤️
-    </p>
+    <div class="opening">
 
-    <h1>
-        I made something
-        <br>
-        <span>special for you.</span>
-    </h1>
+        <div class="heart">♥</div>
 
-    <button onclick="startSurprise()">
-        Open Your Surprise ❤️
-    </button>
+        <div class="eyebrow">
+            HEY BABY... ♥
+        </div>
+
+        <h1>
+            I made something
+            <br>
+            <span>special for you.</span>
+        </h1>
+
+        <div class="name">
+            Haifa
+        </div>
+
+        <button
+                class="main-btn"
+                id="startBtn"
+                type="button"
+        >
+            Open Your Surprise ♥
+        </button>
+
+    </div>
 
 </section>
 
 
-<!-- SCREEN 2 -->
+<!-- ================= SCREEN 2 ================= -->
 
-<section
-    class="screen second-screen"
-    id="screen2"
->
+<section class="screen" id="screen2">
 
-    <p class="small-text">
-        For My Wifeyy ❤️
-    </p>
+    <div class="glass-card">
 
-    <h2>
-        Happy Birthday
-    </h2>
+        <div class="eyebrow">
+            FOR MY WIFEYY ♥
+        </div>
 
-    <p class="message">
+        <h2>
+            Happy Birthday
+        </h2>
 
-        Today isn't just another day...
+        <div class="little-star">✦</div>
 
-        <br><br>
+        <p>
+            Today isn't just another day...
+        </p>
 
-        It's the day a beautiful soul
-        came into this world.
+        <p>
+            It's the day a beautiful soul
+            came into this world.
+        </p>
 
-        <br><br>
+        <p>
+            And somehow, I was lucky enough
+            to have you become a part of mine. ❤️
+        </p>
 
-        And somehow, I was lucky enough
-        to have you become a part of mine. ❤️
+        <button class="main-btn next-btn" data-screen="3">
+            There's More For You ♥
+        </button>
 
-    </p>
-
-    <button onclick="showScreen(3)">
-        There's More For You 💜
-    </button>
+    </div>
 
 </section>
 
 
-<!-- SCREEN 3 -->
+<!-- ================= SCREEN 3 ================= -->
 
-<section
-    class="screen memory-screen"
-    id="screen3"
->
+<section class="screen" id="screen3">
 
-    <p class="small-text">
-        A Little Piece Of Us ❤️
-    </p>
+    <div class="heading">
 
-    <h2>
-        Our Memories
-    </h2>
-
-    <p class="memory-intro">
-
-        Some moments become memories...
-        <br>
-        and some memories become everything. ❤️
-
-    </p>
-
-
-    <div class="photo-grid">
-
-
-        <div class="photo-card">
-
-            <img
-                src="photos/photo1.jpeg"
-                alt="Our memory"
-            >
-
-            <p>
-                My favourite person ❤️
-            </p>
-
+        <div class="eyebrow">
+            A LITTLE PIECE OF US ♥
         </div>
 
+        <h2>
+            Our Memories
+        </h2>
 
-        <div class="photo-card">
-
-            <img
-                src="photos/photo2.jpeg"
-                alt="Our memory"
-            >
-
-            <p>
-                One of my favourite moments 🥺
-            </p>
-
-        </div>
-
-
-        <div class="photo-card">
-
-            <img
-                src="photos/photo3.jpeg"
-                alt="Our memory"
-            >
-
-            <p>
-                A memory I'll always keep ❤️
-            </p>
-
-        </div>
-
+        <p>
+            Some moments become memories...
+            <br>
+            and some memories become everything. ❤️
+        </p>
 
     </div>
 
 
-    <button onclick="showScreen(4)">
+    <div class="photos">
+
+        <div class="photo-card">
+            <img src="photos/photo1.jpeg" alt="Our memory">
+            <p>My favourite person ❤️</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="photos/photo2.jpeg" alt="Our memory">
+            <p>One of my favourite moments 🥺</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="photos/photo3.jpeg" alt="Our memory">
+            <p>A memory I'll always keep ❤️</p>
+        </div>
+
+    </div>
+
+
+    <button class="main-btn next-btn" data-screen="4">
         One More Thing 💌
     </button>
 
 </section>
 
 
-<!-- SCREEN 4 -->
+<!-- ================= SCREEN 4 ================= -->
 
-<section
-    class="screen letter-screen"
-    id="screen4"
->
+<section class="screen" id="screen4">
 
     <div class="letter">
 
-        <p class="small-text">
-            Just For You 💌
-        </p>
+        <div class="letter-head">
 
-        <h2>
-            To My Love
-        </h2>
+            <div class="eyebrow">
+                JUST FOR YOU 💌
+            </div>
 
-        <p>
-            Haifa,
-        </p>
+            <h2>
+                To My Love
+            </h2>
 
-        <p>
-            I don't always know the perfect
-            words to explain what you mean to me.
-        </p>
+        </div>
 
-        <p>
-            But I hope you always know
-            how special you are to me.
-        </p>
 
-        <p>
-            You have brought so many beautiful
-            moments into my life, and I am grateful
-            for every single one of them. ❤️
-        </p>
+        <div class="letter-body">
 
-        <p>
-            I don't need a perfect life.
+            <p>Haifa,</p>
 
-            <br>
+            <p>
+                You mean more to me than words can say.
+            </p>
 
-            I just want a life where I get to see
-            you smile, hear your voice and make
-            beautiful memories with you.
-        </p>
+            <p>
+                But I hope you always know
+                how special you are to me.
+            </p>
 
-        <p>
-            On your birthday, I just want you
-            to know that you are deeply loved.
-        </p>
+            <p>
+                You have brought so many beautiful
+                moments into my life, and I am grateful
+                for every single one of them. ❤️
+            </p>
+
+            <p>
+                I don't need a perfect life.
+            </p>
+
+            <p>
+                I just want a life where I get to see
+                you smile, hear your voice and make
+                beautiful memories with you.
+            </p>
+
+            <p>
+                On your birthday, I just want you
+                to know that you are deeply loved.
+            </p>
+
+        </div>
 
     </div>
 
 
-    <button onclick="showScreen(5)">
+    <button class="main-btn next-btn" data-screen="5">
         One Little Question ❤️
     </button>
 
 </section>
 
 
-<!-- SCREEN 5 -->
+<!-- ================= SCREEN 5 ================= -->
 
-<section
-    class="screen question-screen"
-    id="screen5"
->
+<section class="screen" id="screen5">
 
     <div class="question-card">
 
         <div class="question-heart">
-            💗
+            ♥
         </div>
 
-        <p class="small-text">
-            Before Your Surprise…
-        </p>
+        <div class="eyebrow">
+            BEFORE YOUR SURPRISE...
+        </div>
 
         <h2>
             One Little Question
         </h2>
 
         <p class="question-text">
-
             Will you stay by my side
-
-            <br>
-
+            <br><br>
             and keep making beautiful
             memories with me? ❤️
-
         </p>
 
 
         <div class="question-buttons">
 
             <button
-                class="yes-button"
-                onclick="answerYes()"
+                    class="yes-btn"
+                    id="yesBtn"
+                    type="button"
             >
                 YES ❤️
             </button>
 
-
             <button
-                class="no-button"
-                id="noButton"
+                    class="no-btn"
+                    id="noBtn"
+                    type="button"
             >
                 NO 😏
             </button>
 
         </div>
 
-
-        <p
-            class="question-hint"
-            id="questionHint"
-        >
-            Choose carefully 😌❤️
+        <p id="hint">
+            Choose carefully 😌
         </p>
 
     </div>
@@ -355,59 +270,85 @@
 </section>
 
 
-<!-- SCREEN 6 -->
+<!-- ================= SCREEN 6 ================= -->
 
-<section
-    class="screen cake-screen"
-    id="screen6"
->
+<section class="screen" id="screen6">
 
-    <div class="cake-content">
+    <div class="cake-section">
 
-        <p class="small-text">
-            Make A Wish... ✨
-        </p>
+        <div class="eyebrow">
+            MAKE A WISH... ✦
+        </div>
 
         <h2>
             Your Special Day ❤️
         </h2>
 
+        <p class="cake-intro">
+            Close your eyes, make a wish...
+            <br>
+            then tap the flame. ❤️
+        </p>
+
 
         <!-- CAKE -->
 
-        <div
-            class="cake"
-            id="cake"
-            onclick="blowCandles()"
+        <button
+                class="cake"
+                id="cake"
+                type="button"
+                aria-label="Tap the candle"
         >
 
-            <div
-                class="candle"
-                id="candle1"
-            >
+            <div class="candle">
 
-                <div class="flame"></div>
+                <div class="wick"></div>
+
+                <div
+                        class="flame"
+                        id="flame"
+                ></div>
 
             </div>
 
 
-            <div class="cake-top"></div>
+            <div class="cake-top">
 
-            <div class="cake-middle"></div>
+                <i></i>
+                <i></i>
+                <i></i>
+
+            </div>
+
+
+            <div class="cake-middle">
+
+                <span>♥</span>
+                <span>♥</span>
+                <span>♥</span>
+
+            </div>
+
 
             <div class="cake-bottom"></div>
 
-        </div>
+            <div class="plate"></div>
+
+        </button>
 
 
-        <p id="candleText">
+        <p
+                id="candleText"
+                class="candle-text"
+        >
             Tap the flame ❤️
         </p>
 
 
         <button
-            id="finalButton"
-            onclick="showScreen(7)"
+                id="continueBtn"
+                class="main-btn hidden"
+                type="button"
         >
             Continue ❤️
         </button>
@@ -417,43 +358,45 @@
 </section>
 
 
-<!-- SCREEN 7 -->
+<!-- ================= SCREEN 7 ================= -->
 
-<section
-    class="screen final-screen"
-    id="screen7"
->
+<section class="screen" id="screen7">
 
-    <div class="final-heart">
-        ❤️
+    <div class="final-content">
+
+        <div class="final-heart">
+            ♥
+        </div>
+
+        <div class="eyebrow">
+            HAPPY BIRTHDAY, WIFEYY ❤️
+        </div>
+
+        <h1>
+            I Love You,
+            <br>
+            <span>Haifa.</span>
+        </h1>
+
+        <p class="final-message">
+            If I had to choose you all over again,
+            <br><br>
+            <strong>
+                I would choose you every single time.
+            </strong>
+        </p>
+
+        <p class="forever">
+            You will always have a special place
+            <br>
+            in my heart. ❤️
+        </p>
+
+        <div class="sparkles">
+            ✦　♥　✦
+        </div>
+
     </div>
-
-    <p class="small-text">
-        Happy Birthday, Wifeyy ❤️
-    </p>
-
-    <h1>
-        I Love You,
-        <br>
-        <span>Haifa.</span>
-    </h1>
-
-    <p class="final-message">
-
-        If I had to choose you all over again,
-
-        <br>
-
-        I would choose you every single time.
-
-    </p>
-
-    <p class="forever">
-
-        You will always have a special place
-        in my heart. ❤️
-
-    </p>
 
 </section>
 
@@ -461,5 +404,4 @@
 <script src="script.js"></script>
 
 </body>
-
 </html>
